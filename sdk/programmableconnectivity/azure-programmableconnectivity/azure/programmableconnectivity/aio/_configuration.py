@@ -10,11 +10,11 @@ from typing import Any, TYPE_CHECKING
 
 from azure.core.pipeline import policies
 
-from ._version import VERSION
+from .._version import VERSION
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
-    from azure.core.credentials import TokenCredential
+    from azure.core.credentials_async import AsyncTokenCredential
 
 
 class ProgrammableConnectivityClientConfiguration:  # pylint: disable=too-many-instance-attributes,name-too-long
@@ -23,16 +23,16 @@ class ProgrammableConnectivityClientConfiguration:  # pylint: disable=too-many-i
     Note that all parameters used to create this instance are saved as instance
     attributes.
 
-    :param endpoint: An Azure Programmable Connectivity Endpoint providing access to Network APIs.
-     Required.
+    :param endpoint: An Azure Programmable Connectivity Endpoint providing access to Network APIs,
+     for example eastus.usprod.apcgatewayapi.azure.com. Required.
     :type endpoint: str
     :param credential: Credential needed for the client to connect to Azure. Required.
-    :type credential: ~azure.core.credentials.TokenCredential
+    :type credential: ~azure.core.credentials_async.AsyncTokenCredential
     :param api_version: The API version to use for this operation. Required.
     :type api_version: str
     """
 
-    def __init__(self, endpoint: str, credential: "TokenCredential", api_version: str, **kwargs: Any) -> None:
+    def __init__(self, endpoint: str, credential: "AsyncTokenCredential", api_version: str, **kwargs: Any) -> None:
         if endpoint is None:
             raise ValueError("Parameter 'endpoint' must not be None.")
         if credential is None:
@@ -43,8 +43,10 @@ class ProgrammableConnectivityClientConfiguration:  # pylint: disable=too-many-i
         self.endpoint = endpoint
         self.credential = credential
         self.api_version = api_version
-        self.credential_scopes = kwargs.pop("credential_scopes", ["https://programmableconnectivity.azure.net/default"])
-        kwargs.setdefault("sdk_moniker", "programmable-connectivity/{}".format(VERSION))
+        self.credential_scopes = kwargs.pop(
+            "credential_scopes", ["https://programmableconnectivity.azure.net/.default"]
+        )
+        kwargs.setdefault("sdk_moniker", "programmableconnectivity/{}".format(VERSION))
         self.polling_interval = kwargs.get("polling_interval", 30)
         self._configure(**kwargs)
 
@@ -55,10 +57,10 @@ class ProgrammableConnectivityClientConfiguration:  # pylint: disable=too-many-i
         self.logging_policy = kwargs.get("logging_policy") or policies.NetworkTraceLoggingPolicy(**kwargs)
         self.http_logging_policy = kwargs.get("http_logging_policy") or policies.HttpLoggingPolicy(**kwargs)
         self.custom_hook_policy = kwargs.get("custom_hook_policy") or policies.CustomHookPolicy(**kwargs)
-        self.redirect_policy = kwargs.get("redirect_policy") or policies.RedirectPolicy(**kwargs)
-        self.retry_policy = kwargs.get("retry_policy") or policies.RetryPolicy(**kwargs)
+        self.redirect_policy = kwargs.get("redirect_policy") or policies.AsyncRedirectPolicy(**kwargs)
+        self.retry_policy = kwargs.get("retry_policy") or policies.AsyncRetryPolicy(**kwargs)
         self.authentication_policy = kwargs.get("authentication_policy")
         if self.credential and not self.authentication_policy:
-            self.authentication_policy = policies.BearerTokenCredentialPolicy(
+            self.authentication_policy = policies.AsyncBearerTokenCredentialPolicy(
                 self.credential, *self.credential_scopes, **kwargs
             )

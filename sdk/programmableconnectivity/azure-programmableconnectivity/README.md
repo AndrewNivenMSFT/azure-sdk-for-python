@@ -1,6 +1,6 @@
 
 
-# Azure Programmable Connectivity client library for Python
+# Azure Programmableconnectivity client library for Python
 <!-- write necessary description of service -->
 
 ## Getting started
@@ -8,14 +8,14 @@
 ### Installating the package
 
 ```bash
-python -m pip install azure-programmable-connectivity
+python -m pip install azure-programmableconnectivity
 ```
 
 #### Prequisites
 
 - Python 3.7 or later is required to use this package.
 - You need an [Azure subscription][azure_sub] to use this package.
-- An existing Azure Programmable Connectivity instance.
+- An existing Azure Programmableconnectivity instance.
 #### Create with an Azure Active Directory Credential
 To use an [Azure Active Directory (AAD) token credential][authenticate_with_token],
 provide an instance of the desired credential type obtained from the
@@ -32,7 +32,7 @@ Set the values of the client ID, tenant ID, and client secret of the AAD applica
 Use the returned token credential to authenticate the client:
 
 ```python
->>> from azure.programmable.connectivity import ProgrammableConnectivityClient
+>>> from azure.programmableconnectivity import ProgrammableConnectivityClient
 >>> from azure.identity import DefaultAzureCredential
 >>> client = ProgrammableConnectivityClient(endpoint='<endpoint>', credential=DefaultAzureCredential())
 ```
@@ -40,7 +40,7 @@ Use the returned token credential to authenticate the client:
 ## Examples
 
 ```python
->>> from azure.programmable.connectivity import ProgrammableConnectivityClient
+>>> from azure.programmableconnectivity import ProgrammableConnectivityClient
 >>> from azure.identity import DefaultAzureCredential
 >>> from azure.core.exceptions import HttpResponseError
 

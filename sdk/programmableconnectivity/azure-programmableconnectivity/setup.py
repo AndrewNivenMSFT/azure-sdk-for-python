@@ -12,8 +12,8 @@ import re
 from setuptools import setup, find_packages
 
 
-PACKAGE_NAME = "azure-programmable-connectivity"
-PACKAGE_PPRINT_NAME = "Azure Programmable Connectivity"
+PACKAGE_NAME = "azure-programmableconnectivity"
+PACKAGE_PPRINT_NAME = "Azure Programmableconnectivity"
 
 # a-b-c => a/b/c
 package_folder_path = PACKAGE_NAME.replace("-", "/")
@@ -55,12 +55,11 @@ setup(
             "tests",
             # Exclude packages that will be covered by PEP420 or nspkg
             "azure",
-            "azure.programmable",
         ]
     ),
     include_package_data=True,
     package_data={
-        "azure.programmable.connectivity": ["py.typed"],
+        "azure.programmableconnectivity": ["py.typed"],
     },
     install_requires=[
         "isodate<1.0.0,>=0.6.1",
