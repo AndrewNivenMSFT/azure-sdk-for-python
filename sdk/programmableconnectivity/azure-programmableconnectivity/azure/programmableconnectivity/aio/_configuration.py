@@ -24,7 +24,7 @@ class ProgrammableConnectivityClientConfiguration:  # pylint: disable=too-many-i
     attributes.
 
     :param endpoint: An Azure Programmable Connectivity Endpoint providing access to Network APIs,
-     for example eastus.usprod.apcgatewayapi.azure.com. Required.
+     for example https://{region}.apcgatewayapi.azure.com. Required.
     :type endpoint: str
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
@@ -43,9 +43,7 @@ class ProgrammableConnectivityClientConfiguration:  # pylint: disable=too-many-i
         self.endpoint = endpoint
         self.credential = credential
         self.api_version = api_version
-        self.credential_scopes = kwargs.pop(
-            "credential_scopes", ["https://programmableconnectivity.azure.net/.default"]
-        )
+        self.credential_scopes = kwargs.pop("credential_scopes", ["https://management.azure.com//.default"])
         kwargs.setdefault("sdk_moniker", "programmableconnectivity/{}".format(VERSION))
         self.polling_interval = kwargs.get("polling_interval", 30)
         self._configure(**kwargs)

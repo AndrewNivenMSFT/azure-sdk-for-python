@@ -41,7 +41,7 @@ class ProgrammableConnectivityClient:  # pylint: disable=client-accepts-api-vers
     :vartype sim_swap_interface:
      azure.programmableconnectivity.operations.SimSwapInterfaceOperations
     :param endpoint: An Azure Programmable Connectivity Endpoint providing access to Network APIs,
-     for example eastus.usprod.apcgatewayapi.azure.com. Required.
+     for example https://{region}.apcgatewayapi.azure.com. Required.
     :type endpoint: str
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential

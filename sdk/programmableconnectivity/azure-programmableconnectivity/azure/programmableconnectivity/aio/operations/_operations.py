@@ -64,6 +64,7 @@ class LocationInterfaceOperations:
     @overload
     async def verify(
         self,
+        location: Union[str, _models.LocationEnum],
         body: _models.LocationVerifyRequest,
         *,
         apc_gateway_id: str,
@@ -74,6 +75,8 @@ class LocationInterfaceOperations:
         """Verifies whether a device is within a specified location area, defined as an accuracy (radius)
         around a point, specified by longitude and latitude.
 
+        :param location: Static endpoint. "Location" Required.
+        :type location: str or ~azure.programmableconnectivity.models.LocationEnum
         :param body: Required.
         :type body: ~azure.programmableconnectivity.models.LocationVerifyRequest
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -135,18 +138,26 @@ class LocationInterfaceOperations:
 
                 # response body for status code(s): 200
                 response == {
-                    "verified": bool  # True if the location is verified, False otherwise.
-                      Required.
+                    "verificationResult": bool  # True if the location is in the specified area,
+                      False otherwise. Required.
                 }
         """
 
     @overload
     async def verify(
-        self, body: JSON, *, apc_gateway_id: str, content_type: str = "application/json", **kwargs: Any
+        self,
+        location: Union[str, _models.LocationEnum],
+        body: JSON,
+        *,
+        apc_gateway_id: str,
+        content_type: str = "application/json",
+        **kwargs: Any
     ) -> _models.LocationVerifyResponse:
         """Verifies whether a device is within a specified location area, defined as an accuracy (radius)
         around a point, specified by longitude and latitude.
 
+        :param location: Static endpoint. "Location" Required.
+        :type location: str or ~azure.programmableconnectivity.models.LocationEnum
         :param body: Required.
         :type body: JSON
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -166,18 +177,26 @@ class LocationInterfaceOperations:
 
                 # response body for status code(s): 200
                 response == {
-                    "verified": bool  # True if the location is verified, False otherwise.
-                      Required.
+                    "verificationResult": bool  # True if the location is in the specified area,
+                      False otherwise. Required.
                 }
         """
 
     @overload
     async def verify(
-        self, body: IO[bytes], *, apc_gateway_id: str, content_type: str = "application/json", **kwargs: Any
+        self,
+        location: Union[str, _models.LocationEnum],
+        body: IO[bytes],
+        *,
+        apc_gateway_id: str,
+        content_type: str = "application/json",
+        **kwargs: Any
     ) -> _models.LocationVerifyResponse:
         """Verifies whether a device is within a specified location area, defined as an accuracy (radius)
         around a point, specified by longitude and latitude.
 
+        :param location: Static endpoint. "Location" Required.
+        :type location: str or ~azure.programmableconnectivity.models.LocationEnum
         :param body: Required.
         :type body: IO[bytes]
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -197,19 +216,26 @@ class LocationInterfaceOperations:
 
                 # response body for status code(s): 200
                 response == {
-                    "verified": bool  # True if the location is verified, False otherwise.
-                      Required.
+                    "verificationResult": bool  # True if the location is in the specified area,
+                      False otherwise. Required.
                 }
         """
 
     @distributed_trace_async
     async def verify(
-        self, body: Union[_models.LocationVerifyRequest, JSON, IO[bytes]], *, apc_gateway_id: str, **kwargs: Any
+        self,
+        location: Union[str, _models.LocationEnum],
+        body: Union[_models.LocationVerifyRequest, JSON, IO[bytes]],
+        *,
+        apc_gateway_id: str,
+        **kwargs: Any
     ) -> _models.LocationVerifyResponse:
         # pylint: disable=line-too-long
         """Verifies whether a device is within a specified location area, defined as an accuracy (radius)
         around a point, specified by longitude and latitude.
 
+        :param location: Static endpoint. "Location" Required.
+        :type location: str or ~azure.programmableconnectivity.models.LocationEnum
         :param body: Is one of the following types: LocationVerifyRequest, JSON, IO[bytes] Required.
         :type body: ~azure.programmableconnectivity.models.LocationVerifyRequest or JSON or IO[bytes]
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -271,8 +297,8 @@ class LocationInterfaceOperations:
 
                 # response body for status code(s): 200
                 response == {
-                    "verified": bool  # True if the location is verified, False otherwise.
-                      Required.
+                    "verificationResult": bool  # True if the location is in the specified area,
+                      False otherwise. Required.
                 }
         """
         error_map = {
@@ -297,6 +323,7 @@ class LocationInterfaceOperations:
             _content = json.dumps(body, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
 
         _request = build_location_interface_verify_request(
+            location=location,
             apc_gateway_id=apc_gateway_id,
             api_version=self._config.api_version,
             content_type=content_type,
@@ -359,6 +386,7 @@ class NetworksOperations:
     @overload
     async def retrieve(
         self,
+        network: Union[str, _models.NetworkEnum],
         body: _models.DeviceNetworkIdentifier,
         *,
         apc_gateway_id: str,
@@ -369,6 +397,8 @@ class NetworksOperations:
         """Retrieves the network a given device is on. Returns network in a networkCode format that can be
         used for other APIs.
 
+        :param network: Static endpoint. "Network" Required.
+        :type network: str or ~azure.programmableconnectivity.models.NetworkEnum
         :param body: Required.
         :type body: ~azure.programmableconnectivity.models.DeviceNetworkIdentifier
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -403,12 +433,20 @@ class NetworksOperations:
 
     @overload
     async def retrieve(
-        self, body: JSON, *, apc_gateway_id: str, content_type: str = "application/json", **kwargs: Any
+        self,
+        network: Union[str, _models.NetworkEnum],
+        body: JSON,
+        *,
+        apc_gateway_id: str,
+        content_type: str = "application/json",
+        **kwargs: Any
     ) -> _models.Network:
         # pylint: disable=line-too-long
         """Retrieves the network a given device is on. Returns network in a networkCode format that can be
         used for other APIs.
 
+        :param network: Static endpoint. "Network" Required.
+        :type network: str or ~azure.programmableconnectivity.models.NetworkEnum
         :param body: Required.
         :type body: JSON
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -435,12 +473,20 @@ class NetworksOperations:
 
     @overload
     async def retrieve(
-        self, body: IO[bytes], *, apc_gateway_id: str, content_type: str = "application/json", **kwargs: Any
+        self,
+        network: Union[str, _models.NetworkEnum],
+        body: IO[bytes],
+        *,
+        apc_gateway_id: str,
+        content_type: str = "application/json",
+        **kwargs: Any
     ) -> _models.Network:
         # pylint: disable=line-too-long
         """Retrieves the network a given device is on. Returns network in a networkCode format that can be
         used for other APIs.
 
+        :param network: Static endpoint. "Network" Required.
+        :type network: str or ~azure.programmableconnectivity.models.NetworkEnum
         :param body: Required.
         :type body: IO[bytes]
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -467,12 +513,19 @@ class NetworksOperations:
 
     @distributed_trace_async
     async def retrieve(
-        self, body: Union[_models.DeviceNetworkIdentifier, JSON, IO[bytes]], *, apc_gateway_id: str, **kwargs: Any
+        self,
+        network: Union[str, _models.NetworkEnum],
+        body: Union[_models.DeviceNetworkIdentifier, JSON, IO[bytes]],
+        *,
+        apc_gateway_id: str,
+        **kwargs: Any
     ) -> _models.Network:
         # pylint: disable=line-too-long
         """Retrieves the network a given device is on. Returns network in a networkCode format that can be
         used for other APIs.
 
+        :param network: Static endpoint. "Network" Required.
+        :type network: str or ~azure.programmableconnectivity.models.NetworkEnum
         :param body: Is one of the following types: DeviceNetworkIdentifier, JSON, IO[bytes] Required.
         :type body: ~azure.programmableconnectivity.models.DeviceNetworkIdentifier or JSON or IO[bytes]
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -526,6 +579,7 @@ class NetworksOperations:
             _content = json.dumps(body, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
 
         _request = build_networks_retrieve_request(
+            network=network,
             apc_gateway_id=apc_gateway_id,
             api_version=self._config.api_version,
             content_type=content_type,
@@ -588,6 +642,7 @@ class NumberInterfaceOperations:
     @overload
     async def verify(
         self,
+        number: Union[str, _models.NumberEnum],
         body: _models.NumberVerifyRequest,
         *,
         apc_gateway_id: str,
@@ -597,6 +652,8 @@ class NumberInterfaceOperations:
         # pylint: disable=line-too-long
         """Verifies the phone number (MSISDN) associated with a device.
 
+        :param number: Static endpoint. "Number" Required.
+        :type number: str or ~azure.programmableconnectivity.models.NumberEnum
         :param body: Required.
         :type body: ~azure.programmableconnectivity.models.NumberVerifyRequest
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -633,16 +690,25 @@ class NumberInterfaceOperations:
 
                 # response body for status code(s): 200
                 response == {
-                    "verified": bool  # True if number is verified, False otherwise. Required.
+                    "verificationResult": bool  # True if number if the phone number matches the
+                      device, False otherwise. Required.
                 }
         """
 
     @overload
     async def verify(
-        self, body: JSON, *, apc_gateway_id: str, content_type: str = "application/json", **kwargs: Any
+        self,
+        number: Union[str, _models.NumberEnum],
+        body: JSON,
+        *,
+        apc_gateway_id: str,
+        content_type: str = "application/json",
+        **kwargs: Any
     ) -> _models.NumberVerifyResponse:
         """Verifies the phone number (MSISDN) associated with a device.
 
+        :param number: Static endpoint. "Number" Required.
+        :type number: str or ~azure.programmableconnectivity.models.NumberEnum
         :param body: Required.
         :type body: JSON
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -662,16 +728,25 @@ class NumberInterfaceOperations:
 
                 # response body for status code(s): 200
                 response == {
-                    "verified": bool  # True if number is verified, False otherwise. Required.
+                    "verificationResult": bool  # True if number if the phone number matches the
+                      device, False otherwise. Required.
                 }
         """
 
     @overload
     async def verify(
-        self, body: IO[bytes], *, apc_gateway_id: str, content_type: str = "application/json", **kwargs: Any
+        self,
+        number: Union[str, _models.NumberEnum],
+        body: IO[bytes],
+        *,
+        apc_gateway_id: str,
+        content_type: str = "application/json",
+        **kwargs: Any
     ) -> _models.NumberVerifyResponse:
         """Verifies the phone number (MSISDN) associated with a device.
 
+        :param number: Static endpoint. "Number" Required.
+        :type number: str or ~azure.programmableconnectivity.models.NumberEnum
         :param body: Required.
         :type body: IO[bytes]
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -691,17 +766,25 @@ class NumberInterfaceOperations:
 
                 # response body for status code(s): 200
                 response == {
-                    "verified": bool  # True if number is verified, False otherwise. Required.
+                    "verificationResult": bool  # True if number if the phone number matches the
+                      device, False otherwise. Required.
                 }
         """
 
     @distributed_trace_async
     async def verify(
-        self, body: Union[_models.NumberVerifyRequest, JSON, IO[bytes]], *, apc_gateway_id: str, **kwargs: Any
+        self,
+        number: Union[str, _models.NumberEnum],
+        body: Union[_models.NumberVerifyRequest, JSON, IO[bytes]],
+        *,
+        apc_gateway_id: str,
+        **kwargs: Any
     ) -> _models.NumberVerifyResponse:
         # pylint: disable=line-too-long
         """Verifies the phone number (MSISDN) associated with a device.
 
+        :param number: Static endpoint. "Number" Required.
+        :type number: str or ~azure.programmableconnectivity.models.NumberEnum
         :param body: Is one of the following types: NumberVerifyRequest, JSON, IO[bytes] Required.
         :type body: ~azure.programmableconnectivity.models.NumberVerifyRequest or JSON or IO[bytes]
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -738,7 +821,8 @@ class NumberInterfaceOperations:
 
                 # response body for status code(s): 200
                 response == {
-                    "verified": bool  # True if number is verified, False otherwise. Required.
+                    "verificationResult": bool  # True if number if the phone number matches the
+                      device, False otherwise. Required.
                 }
         """
         error_map = {
@@ -763,6 +847,7 @@ class NumberInterfaceOperations:
             _content = json.dumps(body, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
 
         _request = build_number_interface_verify_request(
+            number=number,
             apc_gateway_id=apc_gateway_id,
             api_version=self._config.api_version,
             content_type=content_type,
@@ -807,6 +892,7 @@ class NumberInterfaceOperations:
     @overload
     async def retrieve(
         self,
+        number: Union[str, _models.NumberEnum],
         body: _models.NetworkIdentifier,
         *,
         apc_gateway_id: str,
@@ -816,6 +902,8 @@ class NumberInterfaceOperations:
         # pylint: disable=line-too-long
         """Retrieves the phone number (MSISDN) associated with a device.
 
+        :param number: Static endpoint. "Number" Required.
+        :type number: str or ~azure.programmableconnectivity.models.NumberEnum
         :param body: Required.
         :type body: ~azure.programmableconnectivity.models.NetworkIdentifier
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -852,11 +940,19 @@ class NumberInterfaceOperations:
 
     @overload
     async def retrieve(
-        self, body: JSON, *, apc_gateway_id: str, content_type: str = "application/json", **kwargs: Any
+        self,
+        number: Union[str, _models.NumberEnum],
+        body: JSON,
+        *,
+        apc_gateway_id: str,
+        content_type: str = "application/json",
+        **kwargs: Any
     ) -> _models.NumberRetrieveResponse:
         # pylint: disable=line-too-long
         """Retrieves the phone number (MSISDN) associated with a device.
 
+        :param number: Static endpoint. "Number" Required.
+        :type number: str or ~azure.programmableconnectivity.models.NumberEnum
         :param body: Required.
         :type body: JSON
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -883,11 +979,19 @@ class NumberInterfaceOperations:
 
     @overload
     async def retrieve(
-        self, body: IO[bytes], *, apc_gateway_id: str, content_type: str = "application/json", **kwargs: Any
+        self,
+        number: Union[str, _models.NumberEnum],
+        body: IO[bytes],
+        *,
+        apc_gateway_id: str,
+        content_type: str = "application/json",
+        **kwargs: Any
     ) -> _models.NumberRetrieveResponse:
         # pylint: disable=line-too-long
         """Retrieves the phone number (MSISDN) associated with a device.
 
+        :param number: Static endpoint. "Number" Required.
+        :type number: str or ~azure.programmableconnectivity.models.NumberEnum
         :param body: Required.
         :type body: IO[bytes]
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -914,11 +1018,18 @@ class NumberInterfaceOperations:
 
     @distributed_trace_async
     async def retrieve(
-        self, body: Union[_models.NetworkIdentifier, JSON, IO[bytes]], *, apc_gateway_id: str, **kwargs: Any
+        self,
+        number: Union[str, _models.NumberEnum],
+        body: Union[_models.NetworkIdentifier, JSON, IO[bytes]],
+        *,
+        apc_gateway_id: str,
+        **kwargs: Any
     ) -> _models.NumberRetrieveResponse:
         # pylint: disable=line-too-long
         """Retrieves the phone number (MSISDN) associated with a device.
 
+        :param number: Static endpoint. "Number" Required.
+        :type number: str or ~azure.programmableconnectivity.models.NumberEnum
         :param body: Is one of the following types: NetworkIdentifier, JSON, IO[bytes] Required.
         :type body: ~azure.programmableconnectivity.models.NetworkIdentifier or JSON or IO[bytes]
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -974,6 +1085,7 @@ class NumberInterfaceOperations:
             _content = json.dumps(body, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
 
         _request = build_number_interface_retrieve_request(
+            number=number,
             apc_gateway_id=apc_gateway_id,
             api_version=self._config.api_version,
             content_type=content_type,
@@ -1036,6 +1148,7 @@ class SimSwapInterfaceOperations:
     @overload
     async def retrieve(
         self,
+        sim_swap: Union[str, _models.SimSwapEnum],
         body: _models.SimSwapRetrieveRequest,
         *,
         apc_gateway_id: str,
@@ -1045,6 +1158,8 @@ class SimSwapInterfaceOperations:
         # pylint: disable=line-too-long
         """Provides timestamp of latest SIM swap.
 
+        :param sim_swap: Static endpoint. "SimSwap" Required.
+        :type sim_swap: str or ~azure.programmableconnectivity.models.SimSwapEnum
         :param body: Required.
         :type body: ~azure.programmableconnectivity.models.SimSwapRetrieveRequest
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -1072,8 +1187,8 @@ class SimSwapInterfaceOperations:
                         "identifierType": "str"  # The type of identifier for the network.
                           one of: 'IPv4', 'IPv6', 'NetworkCode'. Required.
                     },
-                    "phoneNumber": "str"  # Phone number in E.164 format (starting with country
-                      code), and optionally prefixed with '+'. Required.
+                    "phoneNumber": "str"  # Optional. Phone number in E.164 format (starting with
+                      country code), and optionally prefixed with '+'.
                 }
 
                 # response body for status code(s): 200
@@ -1085,10 +1200,18 @@ class SimSwapInterfaceOperations:
 
     @overload
     async def retrieve(
-        self, body: JSON, *, apc_gateway_id: str, content_type: str = "application/json", **kwargs: Any
+        self,
+        sim_swap: Union[str, _models.SimSwapEnum],
+        body: JSON,
+        *,
+        apc_gateway_id: str,
+        content_type: str = "application/json",
+        **kwargs: Any
     ) -> _models.SimSwapRetrieveResponse:
         """Provides timestamp of latest SIM swap.
 
+        :param sim_swap: Static endpoint. "SimSwap" Required.
+        :type sim_swap: str or ~azure.programmableconnectivity.models.SimSwapEnum
         :param body: Required.
         :type body: JSON
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -1115,10 +1238,18 @@ class SimSwapInterfaceOperations:
 
     @overload
     async def retrieve(
-        self, body: IO[bytes], *, apc_gateway_id: str, content_type: str = "application/json", **kwargs: Any
+        self,
+        sim_swap: Union[str, _models.SimSwapEnum],
+        body: IO[bytes],
+        *,
+        apc_gateway_id: str,
+        content_type: str = "application/json",
+        **kwargs: Any
     ) -> _models.SimSwapRetrieveResponse:
         """Provides timestamp of latest SIM swap.
 
+        :param sim_swap: Static endpoint. "SimSwap" Required.
+        :type sim_swap: str or ~azure.programmableconnectivity.models.SimSwapEnum
         :param body: Required.
         :type body: IO[bytes]
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -1145,11 +1276,18 @@ class SimSwapInterfaceOperations:
 
     @distributed_trace_async
     async def retrieve(
-        self, body: Union[_models.SimSwapRetrieveRequest, JSON, IO[bytes]], *, apc_gateway_id: str, **kwargs: Any
+        self,
+        sim_swap: Union[str, _models.SimSwapEnum],
+        body: Union[_models.SimSwapRetrieveRequest, JSON, IO[bytes]],
+        *,
+        apc_gateway_id: str,
+        **kwargs: Any
     ) -> _models.SimSwapRetrieveResponse:
         # pylint: disable=line-too-long
         """Provides timestamp of latest SIM swap.
 
+        :param sim_swap: Static endpoint. "SimSwap" Required.
+        :type sim_swap: str or ~azure.programmableconnectivity.models.SimSwapEnum
         :param body: Is one of the following types: SimSwapRetrieveRequest, JSON, IO[bytes] Required.
         :type body: ~azure.programmableconnectivity.models.SimSwapRetrieveRequest or JSON or IO[bytes]
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -1177,8 +1315,8 @@ class SimSwapInterfaceOperations:
                         "identifierType": "str"  # The type of identifier for the network.
                           one of: 'IPv4', 'IPv6', 'NetworkCode'. Required.
                     },
-                    "phoneNumber": "str"  # Phone number in E.164 format (starting with country
-                      code), and optionally prefixed with '+'. Required.
+                    "phoneNumber": "str"  # Optional. Phone number in E.164 format (starting with
+                      country code), and optionally prefixed with '+'.
                 }
 
                 # response body for status code(s): 200
@@ -1209,6 +1347,7 @@ class SimSwapInterfaceOperations:
             _content = json.dumps(body, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
 
         _request = build_sim_swap_interface_retrieve_request(
+            sim_swap=sim_swap,
             apc_gateway_id=apc_gateway_id,
             api_version=self._config.api_version,
             content_type=content_type,
@@ -1253,6 +1392,7 @@ class SimSwapInterfaceOperations:
     @overload
     async def verify(
         self,
+        sim_swap: Union[str, _models.SimSwapEnum],
         body: _models.SimSwapVerifyRequest,
         *,
         apc_gateway_id: str,
@@ -1263,6 +1403,8 @@ class SimSwapInterfaceOperations:
         """Verifies if a SIM swap has been performed during a past period (defined in the request with
         'maxAgeHours' attribute). Returns 'True' if a SIM swap has occured.
 
+        :param sim_swap: Static endpoint. "SimSwap" Required.
+        :type sim_swap: str or ~azure.programmableconnectivity.models.SimSwapEnum
         :param body: Required.
         :type body: ~azure.programmableconnectivity.models.SimSwapVerifyRequest
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -1290,23 +1432,33 @@ class SimSwapInterfaceOperations:
                         "identifierType": "str"  # The type of identifier for the network.
                           one of: 'IPv4', 'IPv6', 'NetworkCode'. Required.
                     },
-                    "maxAgeHours": 0  # Optional. Maximum lookback for SimSwap verification.
+                    "maxAgeHours": 0,  # Optional. Maximum lookback for SimSwap verification.
+                    "phoneNumber": "str"  # Optional. Phone number in E.164 format (starting with
+                      country code), and optionally prefixed with '+'.
                 }
 
                 # response body for status code(s): 200
                 response == {
-                    "verified": bool  # True if the SIM has swapped in the specified period,
-                      False otherwise. Required.
+                    "verificationResult": bool  # True if the SIM has swapped in the specified
+                      period, False otherwise. Required.
                 }
         """
 
     @overload
     async def verify(
-        self, body: JSON, *, apc_gateway_id: str, content_type: str = "application/json", **kwargs: Any
+        self,
+        sim_swap: Union[str, _models.SimSwapEnum],
+        body: JSON,
+        *,
+        apc_gateway_id: str,
+        content_type: str = "application/json",
+        **kwargs: Any
     ) -> _models.SimSwapVerifyResponse:
         """Verifies if a SIM swap has been performed during a past period (defined in the request with
         'maxAgeHours' attribute). Returns 'True' if a SIM swap has occured.
 
+        :param sim_swap: Static endpoint. "SimSwap" Required.
+        :type sim_swap: str or ~azure.programmableconnectivity.models.SimSwapEnum
         :param body: Required.
         :type body: JSON
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -1326,18 +1478,26 @@ class SimSwapInterfaceOperations:
 
                 # response body for status code(s): 200
                 response == {
-                    "verified": bool  # True if the SIM has swapped in the specified period,
-                      False otherwise. Required.
+                    "verificationResult": bool  # True if the SIM has swapped in the specified
+                      period, False otherwise. Required.
                 }
         """
 
     @overload
     async def verify(
-        self, body: IO[bytes], *, apc_gateway_id: str, content_type: str = "application/json", **kwargs: Any
+        self,
+        sim_swap: Union[str, _models.SimSwapEnum],
+        body: IO[bytes],
+        *,
+        apc_gateway_id: str,
+        content_type: str = "application/json",
+        **kwargs: Any
     ) -> _models.SimSwapVerifyResponse:
         """Verifies if a SIM swap has been performed during a past period (defined in the request with
         'maxAgeHours' attribute). Returns 'True' if a SIM swap has occured.
 
+        :param sim_swap: Static endpoint. "SimSwap" Required.
+        :type sim_swap: str or ~azure.programmableconnectivity.models.SimSwapEnum
         :param body: Required.
         :type body: IO[bytes]
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -1357,19 +1517,26 @@ class SimSwapInterfaceOperations:
 
                 # response body for status code(s): 200
                 response == {
-                    "verified": bool  # True if the SIM has swapped in the specified period,
-                      False otherwise. Required.
+                    "verificationResult": bool  # True if the SIM has swapped in the specified
+                      period, False otherwise. Required.
                 }
         """
 
     @distributed_trace_async
     async def verify(
-        self, body: Union[_models.SimSwapVerifyRequest, JSON, IO[bytes]], *, apc_gateway_id: str, **kwargs: Any
+        self,
+        sim_swap: Union[str, _models.SimSwapEnum],
+        body: Union[_models.SimSwapVerifyRequest, JSON, IO[bytes]],
+        *,
+        apc_gateway_id: str,
+        **kwargs: Any
     ) -> _models.SimSwapVerifyResponse:
         # pylint: disable=line-too-long
         """Verifies if a SIM swap has been performed during a past period (defined in the request with
         'maxAgeHours' attribute). Returns 'True' if a SIM swap has occured.
 
+        :param sim_swap: Static endpoint. "SimSwap" Required.
+        :type sim_swap: str or ~azure.programmableconnectivity.models.SimSwapEnum
         :param body: Is one of the following types: SimSwapVerifyRequest, JSON, IO[bytes] Required.
         :type body: ~azure.programmableconnectivity.models.SimSwapVerifyRequest or JSON or IO[bytes]
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -1397,13 +1564,15 @@ class SimSwapInterfaceOperations:
                         "identifierType": "str"  # The type of identifier for the network.
                           one of: 'IPv4', 'IPv6', 'NetworkCode'. Required.
                     },
-                    "maxAgeHours": 0  # Optional. Maximum lookback for SimSwap verification.
+                    "maxAgeHours": 0,  # Optional. Maximum lookback for SimSwap verification.
+                    "phoneNumber": "str"  # Optional. Phone number in E.164 format (starting with
+                      country code), and optionally prefixed with '+'.
                 }
 
                 # response body for status code(s): 200
                 response == {
-                    "verified": bool  # True if the SIM has swapped in the specified period,
-                      False otherwise. Required.
+                    "verificationResult": bool  # True if the SIM has swapped in the specified
+                      period, False otherwise. Required.
                 }
         """
         error_map = {
@@ -1428,6 +1597,7 @@ class SimSwapInterfaceOperations:
             _content = json.dumps(body, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
 
         _request = build_sim_swap_interface_verify_request(
+            sim_swap=sim_swap,
             apc_gateway_id=apc_gateway_id,
             api_version=self._config.api_version,
             content_type=content_type,

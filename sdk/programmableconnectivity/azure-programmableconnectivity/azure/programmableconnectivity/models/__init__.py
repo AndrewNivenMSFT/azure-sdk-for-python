@@ -22,6 +22,11 @@ from ._models import SimSwapRetrieveRequest
 from ._models import SimSwapRetrieveResponse
 from ._models import SimSwapVerifyRequest
 from ._models import SimSwapVerifyResponse
+
+from ._enums import LocationEnum
+from ._enums import NetworkEnum
+from ._enums import NumberEnum
+from ._enums import SimSwapEnum
 from ._patch import __all__ as _patch_all
 from ._patch import *  # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
@@ -43,6 +48,10 @@ __all__ = [
     "SimSwapRetrieveResponse",
     "SimSwapVerifyRequest",
     "SimSwapVerifyResponse",
+    "LocationEnum",
+    "NetworkEnum",
+    "NumberEnum",
+    "SimSwapEnum",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
 _patch_sdk()

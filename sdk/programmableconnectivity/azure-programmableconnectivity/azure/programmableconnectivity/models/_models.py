@@ -23,21 +23,21 @@ class ApcErrorResponse(_model_base.Model):
 
     All required parameters must be populated in order to send to server.
 
-    :ivar status: The numeric error code. Required.
+    :ivar status: The numerical error status eg 500, 404. Required.
     :vartype status: int
     :ivar code: The error code. Required.
     :vartype code: str
-    :ivar error_message: The detailed error message. Required.
-    :vartype error_message: str
+    :ivar message: The detailed error message. Required.
+    :vartype message: str
     :ivar consent_url: The consent URL in case of a consent failure.
     :vartype consent_url: str
     """
 
     status: int = rest_field()
-    """The numeric error code. Required."""
+    """The numerical error status eg 500, 404. Required."""
     code: str = rest_field()
     """The error code. Required."""
-    error_message: str = rest_field(name="errorMessage")
+    message: str = rest_field()
     """The detailed error message. Required."""
     consent_url: Optional[str] = rest_field(name="consentUrl")
     """The consent URL in case of a consent failure."""
@@ -48,7 +48,7 @@ class ApcErrorResponse(_model_base.Model):
         *,
         status: int,
         code: str,
-        error_message: str,
+        message: str,
         consent_url: Optional[str] = None,
     ):
         ...
@@ -225,9 +225,9 @@ class LocationDevice(_model_base.Model):
     :ivar phone_number: Phone number in E.164 format (starting with country code), and optionally
      prefixed with '+'.
     :vartype phone_number: str
-    :ivar ipv4_address: IPv4 address and port of the device.
+    :ivar ipv4_address: The Ipv4 address.
     :vartype ipv4_address: ~azure.programmableconnectivity.models.Ipv4Address
-    :ivar ipv6_address: IPv6 address and port of the device.
+    :ivar ipv6_address: The Ipv6 address.
     :vartype ipv6_address: ~azure.programmableconnectivity.models.Ipv6Address
     """
 
@@ -236,9 +236,9 @@ class LocationDevice(_model_base.Model):
     phone_number: Optional[str] = rest_field(name="phoneNumber")
     """Phone number in E.164 format (starting with country code), and optionally prefixed with '+'."""
     ipv4_address: Optional["_models.Ipv4Address"] = rest_field(name="ipv4Address")
-    """IPv4 address and port of the device."""
+    """The Ipv4 address."""
     ipv6_address: Optional["_models.Ipv6Address"] = rest_field(name="ipv6Address")
-    """IPv6 address and port of the device."""
+    """The Ipv6 address."""
 
     @overload
     def __init__(
@@ -319,18 +319,19 @@ class LocationVerifyResponse(_model_base.Model):
 
     All required parameters must be populated in order to send to server.
 
-    :ivar verified: True if the location is verified, False otherwise. Required.
-    :vartype verified: bool
+    :ivar verification_result: True if the location is in the specified area, False otherwise.
+     Required.
+    :vartype verification_result: bool
     """
 
-    verified: bool = rest_field()
-    """True if the location is verified, False otherwise. Required."""
+    verification_result: bool = rest_field(name="verificationResult")
+    """True if the location is in the specified area, False otherwise. Required."""
 
     @overload
     def __init__(
         self,
         *,
-        verified: bool,
+        verification_result: bool,
     ):
         ...
 
@@ -508,18 +509,19 @@ class NumberVerifyResponse(_model_base.Model):
 
     All required parameters must be populated in order to send to server.
 
-    :ivar verified: True if number is verified, False otherwise. Required.
-    :vartype verified: bool
+    :ivar verification_result: True if number if the phone number matches the device, False
+     otherwise. Required.
+    :vartype verification_result: bool
     """
 
-    verified: bool = rest_field()
-    """True if number is verified, False otherwise. Required."""
+    verification_result: bool = rest_field(name="verificationResult")
+    """True if number if the phone number matches the device, False otherwise. Required."""
 
     @overload
     def __init__(
         self,
         *,
-        verified: bool,
+        verification_result: bool,
     ):
         ...
 
@@ -540,15 +542,14 @@ class SimSwapRetrieveRequest(_model_base.Model):
     All required parameters must be populated in order to send to server.
 
     :ivar phone_number: Phone number in E.164 format (starting with country code), and optionally
-     prefixed with '+'. Required.
+     prefixed with '+'.
     :vartype phone_number: str
     :ivar network_identifier: Network to query for this device. Required.
     :vartype network_identifier: ~azure.programmableconnectivity.models.NetworkIdentifier
     """
 
-    phone_number: str = rest_field(name="phoneNumber")
-    """Phone number in E.164 format (starting with country code), and optionally prefixed with '+'.
-     Required."""
+    phone_number: Optional[str] = rest_field(name="phoneNumber")
+    """Phone number in E.164 format (starting with country code), and optionally prefixed with '+'."""
     network_identifier: "_models.NetworkIdentifier" = rest_field(name="networkIdentifier")
     """Network to query for this device. Required."""
 
@@ -556,8 +557,8 @@ class SimSwapRetrieveRequest(_model_base.Model):
     def __init__(
         self,
         *,
-        phone_number: str,
         network_identifier: "_models.NetworkIdentifier",
+        phone_number: Optional[str] = None,
     ):
         ...
 
@@ -608,12 +609,17 @@ class SimSwapVerifyRequest(_model_base.Model):
 
     All required parameters must be populated in order to send to server.
 
+    :ivar phone_number: Phone number in E.164 format (starting with country code), and optionally
+     prefixed with '+'.
+    :vartype phone_number: str
     :ivar max_age_hours: Maximum lookback for SimSwap verification.
     :vartype max_age_hours: int
     :ivar network_identifier: Identifier for the network to query for this device. Required.
     :vartype network_identifier: ~azure.programmableconnectivity.models.NetworkIdentifier
     """
 
+    phone_number: Optional[str] = rest_field(name="phoneNumber")
+    """Phone number in E.164 format (starting with country code), and optionally prefixed with '+'."""
     max_age_hours: Optional[int] = rest_field(name="maxAgeHours")
     """Maximum lookback for SimSwap verification."""
     network_identifier: "_models.NetworkIdentifier" = rest_field(name="networkIdentifier")
@@ -624,6 +630,7 @@ class SimSwapVerifyRequest(_model_base.Model):
         self,
         *,
         network_identifier: "_models.NetworkIdentifier",
+        phone_number: Optional[str] = None,
         max_age_hours: Optional[int] = None,
     ):
         ...
@@ -644,18 +651,19 @@ class SimSwapVerifyResponse(_model_base.Model):
 
     All required parameters must be populated in order to send to server.
 
-    :ivar verified: True if the SIM has swapped in the specified period, False otherwise. Required.
-    :vartype verified: bool
+    :ivar verification_result: True if the SIM has swapped in the specified period, False
+     otherwise. Required.
+    :vartype verification_result: bool
     """
 
-    verified: bool = rest_field()
+    verification_result: bool = rest_field(name="verificationResult")
     """True if the SIM has swapped in the specified period, False otherwise. Required."""
 
     @overload
     def __init__(
         self,
         *,
-        verified: bool,
+        verification_result: bool,
     ):
         ...
 
