@@ -16,10 +16,10 @@ from azure.core.rest import AsyncHttpResponse, HttpRequest
 from .._serialization import Deserializer, Serializer
 from ._configuration import ProgrammableConnectivityClientConfiguration
 from .operations import (
-    LocationInterfaceOperations,
-    NetworksOperations,
-    NumberInterfaceOperations,
-    SimSwapInterfaceOperations,
+    DeviceLocationOperations,
+    DeviceNetworkOperations,
+    NumberVerificationOperations,
+    SimSwapOperations,
 )
 
 if TYPE_CHECKING:
@@ -28,33 +28,34 @@ if TYPE_CHECKING:
 
 
 class ProgrammableConnectivityClient:  # pylint: disable=client-accepts-api-version-keyword
-    """ProgrammableConnectivityClient.
+    """Azure Programmable Connectivity (APC) provides a unified interface to the Network APIs of
+    multiple Telecom Operators. Note that Operators may deprecate a Network API with less advance
+    notice than the Azure standard, in which case APC will also deprecate that Network API.
 
-    :ivar location_interface: LocationInterfaceOperations operations
-    :vartype location_interface:
-     azure.programmableconnectivity.aio.operations.LocationInterfaceOperations
-    :ivar networks: NetworksOperations operations
-    :vartype networks: azure.programmableconnectivity.aio.operations.NetworksOperations
-    :ivar number_interface: NumberInterfaceOperations operations
-    :vartype number_interface:
-     azure.programmableconnectivity.aio.operations.NumberInterfaceOperations
-    :ivar sim_swap_interface: SimSwapInterfaceOperations operations
-    :vartype sim_swap_interface:
-     azure.programmableconnectivity.aio.operations.SimSwapInterfaceOperations
+    :ivar device_location: DeviceLocationOperations operations
+    :vartype device_location:
+     azure.programmableconnectivity.aio.operations.DeviceLocationOperations
+    :ivar device_network: DeviceNetworkOperations operations
+    :vartype device_network: azure.programmableconnectivity.aio.operations.DeviceNetworkOperations
+    :ivar number_verification: NumberVerificationOperations operations
+    :vartype number_verification:
+     azure.programmableconnectivity.aio.operations.NumberVerificationOperations
+    :ivar sim_swap: SimSwapOperations operations
+    :vartype sim_swap: azure.programmableconnectivity.aio.operations.SimSwapOperations
     :param endpoint: An Azure Programmable Connectivity Endpoint providing access to Network APIs,
      for example https://{region}.apcgatewayapi.azure.com. Required.
     :type endpoint: str
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
-    :param api_version: The API version to use for this operation. Required.
-    :type api_version: str
+    :keyword api_version: The API version to use for this operation. Default value is
+     "2024-02-09-preview". Note that overriding this default value may result in unsupported
+     behavior.
+    :paramtype api_version: str
     """
 
-    def __init__(self, endpoint: str, credential: "AsyncTokenCredential", api_version: str, **kwargs: Any) -> None:
+    def __init__(self, endpoint: str, credential: "AsyncTokenCredential", **kwargs: Any) -> None:
         _endpoint = "{endpoint}"
-        self._config = ProgrammableConnectivityClientConfiguration(
-            endpoint=endpoint, credential=credential, api_version=api_version, **kwargs
-        )
+        self._config = ProgrammableConnectivityClientConfiguration(endpoint=endpoint, credential=credential, **kwargs)
         _policies = kwargs.pop("policies", None)
         if _policies is None:
             _policies = [
@@ -77,16 +78,12 @@ class ProgrammableConnectivityClient:  # pylint: disable=client-accepts-api-vers
         self._serialize = Serializer()
         self._deserialize = Deserializer()
         self._serialize.client_side_validation = False
-        self.location_interface = LocationInterfaceOperations(
+        self.device_location = DeviceLocationOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.device_network = DeviceNetworkOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.number_verification = NumberVerificationOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.networks = NetworksOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.number_interface = NumberInterfaceOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.sim_swap_interface = SimSwapInterfaceOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.sim_swap = SimSwapOperations(self._client, self._config, self._serialize, self._deserialize)
 
     def send_request(
         self, request: HttpRequest, *, stream: bool = False, **kwargs: Any

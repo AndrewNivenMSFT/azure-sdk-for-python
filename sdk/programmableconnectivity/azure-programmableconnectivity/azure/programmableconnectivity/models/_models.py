@@ -18,38 +18,44 @@ if TYPE_CHECKING:
     from .. import models as _models
 
 
-class ApcErrorResponse(_model_base.Model):
-    """A custom error type for APC.
+class DeviceLocationVerificationContent(_model_base.Model):
+    """Request to verify Location.
 
     All required parameters must be populated in order to send to server.
 
-    :ivar status: The numerical error status eg 500, 404. Required.
-    :vartype status: int
-    :ivar code: The error code. Required.
-    :vartype code: str
-    :ivar message: The detailed error message. Required.
-    :vartype message: str
-    :ivar consent_url: The consent URL in case of a consent failure.
-    :vartype consent_url: str
+    :ivar network_identifier: Network to query for this device, or device information to enable
+     network routing. Required.
+    :vartype network_identifier: ~azure.programmableconnectivity.models.NetworkIdentifier
+    :ivar latitude: Latitude of location to be verified. Required.
+    :vartype latitude: float
+    :ivar longitude: Longitude of location to be verified. Required.
+    :vartype longitude: float
+    :ivar accuracy: Accuracy expected for location verification in kilometers. Required.
+    :vartype accuracy: int
+    :ivar location_device: The device to find the location for. Required.
+    :vartype location_device: ~azure.programmableconnectivity.models.LocationDevice
     """
 
-    status: int = rest_field()
-    """The numerical error status eg 500, 404. Required."""
-    code: str = rest_field()
-    """The error code. Required."""
-    message: str = rest_field()
-    """The detailed error message. Required."""
-    consent_url: Optional[str] = rest_field(name="consentUrl")
-    """The consent URL in case of a consent failure."""
+    network_identifier: "_models.NetworkIdentifier" = rest_field(name="networkIdentifier")
+    """Network to query for this device, or device information to enable network routing. Required."""
+    latitude: float = rest_field()
+    """Latitude of location to be verified. Required."""
+    longitude: float = rest_field()
+    """Longitude of location to be verified. Required."""
+    accuracy: int = rest_field()
+    """Accuracy expected for location verification in kilometers. Required."""
+    location_device: "_models.LocationDevice" = rest_field(name="locationDevice")
+    """The device to find the location for. Required."""
 
     @overload
     def __init__(
         self,
         *,
-        status: int,
-        code: str,
-        message: str,
-        consent_url: Optional[str] = None,
+        network_identifier: "_models.NetworkIdentifier",
+        latitude: float,
+        longitude: float,
+        accuracy: int,
+        location_device: "_models.LocationDevice",
     ):
         ...
 
@@ -64,36 +70,53 @@ class ApcErrorResponse(_model_base.Model):
         super().__init__(*args, **kwargs)
 
 
-class DeviceNetworkIdentifier(_model_base.Model):
-    """The device for which to find the network.
+class DeviceLocationVerificationResult(_model_base.Model):
+    """Response verifying location.
 
     All required parameters must be populated in order to send to server.
 
-    :ivar identifier_type: The type of device identifier given: 'IPv4' or 'IPv6'. Required.
-    :vartype identifier_type: str
-    :ivar device_identifier: The device identifier in a format matching the type above:
-
-
-     * IPv4 in dotted-quad format.
-     * IPV6 in IETF 5952 format. Required.
-    :vartype device_identifier: str
+    :ivar verification_result: True if the location is in the specified area, False otherwise.
+     Required.
+    :vartype verification_result: bool
     """
 
-    identifier_type: str = rest_field(name="identifierType")
-    """The type of device identifier given: 'IPv4' or 'IPv6'. Required."""
-    device_identifier: str = rest_field(name="deviceIdentifier")
-    """The device identifier in a format matching the type above:
-     
-     
-     * IPv4 in dotted-quad format.
-     * IPV6 in IETF 5952 format. Required."""
+    verification_result: bool = rest_field(name="verificationResult")
+    """True if the location is in the specified area, False otherwise. Required."""
 
     @overload
     def __init__(
         self,
         *,
-        identifier_type: str,
-        device_identifier: str,
+        verification_result: bool,
+    ):
+        ...
+
+    @overload
+    def __init__(self, mapping: Mapping[str, Any]):
+        """
+        :param mapping: raw JSON to initialize the model.
+        :type mapping: Mapping[str, Any]
+        """
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:  # pylint: disable=useless-super-delegation
+        super().__init__(*args, **kwargs)
+
+
+class EmptyResponse(_model_base.Model):
+    """Empty model to return as part of 302 redirect.
+
+    :ivar content: Optional content.
+    :vartype content: str
+    """
+
+    content: Optional[str] = rest_field()
+    """Optional content."""
+
+    @overload
+    def __init__(
+        self,
+        *,
+        content: Optional[str] = None,
     ):
         ...
 
@@ -262,123 +285,6 @@ class LocationDevice(_model_base.Model):
         super().__init__(*args, **kwargs)
 
 
-class LocationVerifyRequest(_model_base.Model):
-    """Request to verify Location.
-
-    All required parameters must be populated in order to send to server.
-
-    :ivar network_identifier: Network to query for this device, or device information to enable
-     network routing. Required.
-    :vartype network_identifier: ~azure.programmableconnectivity.models.NetworkIdentifier
-    :ivar latitude: Latitude of location to be verified. Required.
-    :vartype latitude: float
-    :ivar longitude: Longitude of location to be verified. Required.
-    :vartype longitude: float
-    :ivar accuracy: Accuracy expected for location verification in kilometers. Required.
-    :vartype accuracy: int
-    :ivar location_device: The device to find the location for. Required.
-    :vartype location_device: ~azure.programmableconnectivity.models.LocationDevice
-    """
-
-    network_identifier: "_models.NetworkIdentifier" = rest_field(name="networkIdentifier")
-    """Network to query for this device, or device information to enable network routing. Required."""
-    latitude: float = rest_field()
-    """Latitude of location to be verified. Required."""
-    longitude: float = rest_field()
-    """Longitude of location to be verified. Required."""
-    accuracy: int = rest_field()
-    """Accuracy expected for location verification in kilometers. Required."""
-    location_device: "_models.LocationDevice" = rest_field(name="locationDevice")
-    """The device to find the location for. Required."""
-
-    @overload
-    def __init__(
-        self,
-        *,
-        network_identifier: "_models.NetworkIdentifier",
-        latitude: float,
-        longitude: float,
-        accuracy: int,
-        location_device: "_models.LocationDevice",
-    ):
-        ...
-
-    @overload
-    def __init__(self, mapping: Mapping[str, Any]):
-        """
-        :param mapping: raw JSON to initialize the model.
-        :type mapping: Mapping[str, Any]
-        """
-
-    def __init__(self, *args: Any, **kwargs: Any) -> None:  # pylint: disable=useless-super-delegation
-        super().__init__(*args, **kwargs)
-
-
-class LocationVerifyResponse(_model_base.Model):
-    """Response verifying location.
-
-    All required parameters must be populated in order to send to server.
-
-    :ivar verification_result: True if the location is in the specified area, False otherwise.
-     Required.
-    :vartype verification_result: bool
-    """
-
-    verification_result: bool = rest_field(name="verificationResult")
-    """True if the location is in the specified area, False otherwise. Required."""
-
-    @overload
-    def __init__(
-        self,
-        *,
-        verification_result: bool,
-    ):
-        ...
-
-    @overload
-    def __init__(self, mapping: Mapping[str, Any]):
-        """
-        :param mapping: raw JSON to initialize the model.
-        :type mapping: Mapping[str, Any]
-        """
-
-    def __init__(self, *args: Any, **kwargs: Any) -> None:  # pylint: disable=useless-super-delegation
-        super().__init__(*args, **kwargs)
-
-
-class Network(_model_base.Model):
-    """The network that the device is on.
-
-    All required parameters must be populated in order to send to server.
-
-    :ivar network_code: The identifier for the network. This can be used as the networkIdentifier
-     for the service APIs. Required.
-    :vartype network_code: str
-    """
-
-    network_code: str = rest_field(name="networkCode")
-    """The identifier for the network. This can be used as the networkIdentifier for the service APIs.
-     Required."""
-
-    @overload
-    def __init__(
-        self,
-        *,
-        network_code: str,
-    ):
-        ...
-
-    @overload
-    def __init__(self, mapping: Mapping[str, Any]):
-        """
-        :param mapping: raw JSON to initialize the model.
-        :type mapping: Mapping[str, Any]
-        """
-
-    def __init__(self, *args: Any, **kwargs: Any) -> None:  # pylint: disable=useless-super-delegation
-        super().__init__(*args, **kwargs)
-
-
 class NetworkIdentifier(_model_base.Model):
     """Identifier for the network to be queried.
 
@@ -426,25 +332,25 @@ class NetworkIdentifier(_model_base.Model):
         super().__init__(*args, **kwargs)
 
 
-class NumberRetrieveResponse(_model_base.Model):
-    """Response with number of device.
+class NetworkRetrievalResult(_model_base.Model):
+    """The network that the device is on.
 
     All required parameters must be populated in order to send to server.
 
-    :ivar phone_number: Phone number in E.164 format (starting with country code), and optionally
-     prefixed with '+'. Required.
-    :vartype phone_number: str
+    :ivar network_code: The identifier for the network. This can be used as the networkIdentifier
+     for the service APIs. Required.
+    :vartype network_code: str
     """
 
-    phone_number: str = rest_field(name="phoneNumber")
-    """Phone number in E.164 format (starting with country code), and optionally prefixed with '+'.
+    network_code: str = rest_field(name="networkCode")
+    """The identifier for the network. This can be used as the networkIdentifier for the service APIs.
      Required."""
 
     @overload
     def __init__(
         self,
         *,
-        phone_number: str,
+        network_code: str,
     ):
         ...
 
@@ -459,8 +365,90 @@ class NumberRetrieveResponse(_model_base.Model):
         super().__init__(*args, **kwargs)
 
 
-class NumberVerifyRequest(_model_base.Model):
-    """Request to verify number of device.
+class NumberVerificationResult(_model_base.Model):
+    """Response verifying number of device.
+
+    All required parameters must be populated in order to send to server.
+
+    :ivar verification_result: True if number if the phone number matches the device, False
+     otherwise. Required.
+    :vartype verification_result: bool
+    """
+
+    verification_result: bool = rest_field(name="verificationResult")
+    """True if number if the phone number matches the device, False otherwise. Required."""
+
+    @overload
+    def __init__(
+        self,
+        *,
+        verification_result: bool,
+    ):
+        ...
+
+    @overload
+    def __init__(self, mapping: Mapping[str, Any]):
+        """
+        :param mapping: raw JSON to initialize the model.
+        :type mapping: Mapping[str, Any]
+        """
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:  # pylint: disable=useless-super-delegation
+        super().__init__(*args, **kwargs)
+
+
+class NumberVerificationWithCodeContent(_model_base.Model):
+    """Request to verify number of device - second call.
+
+    All required parameters must be populated in order to send to server.
+
+    :ivar network_identifier: Identifier for the network to query for this device. Required.
+    :vartype network_identifier: ~azure.programmableconnectivity.models.NetworkIdentifier
+    :ivar phone_number: Phone number in E.164 format (starting with country code), and optionally
+     prefixed with '+'.
+    :vartype phone_number: str
+    :ivar hashed_phone_number: Hashed phone number. SHA-256 (in hexadecimal representation) of the
+     mobile phone number in **E.164 format (starting with country code)**. Optionally prefixed with
+     '+'.
+    :vartype hashed_phone_number: str
+    :ivar apc_code: The code provided by APC in exchange for the operator code. Required.
+    :vartype apc_code: str
+    """
+
+    network_identifier: "_models.NetworkIdentifier" = rest_field(name="networkIdentifier")
+    """Identifier for the network to query for this device. Required."""
+    phone_number: Optional[str] = rest_field(name="phoneNumber")
+    """Phone number in E.164 format (starting with country code), and optionally prefixed with '+'."""
+    hashed_phone_number: Optional[str] = rest_field(name="hashedPhoneNumber")
+    """Hashed phone number. SHA-256 (in hexadecimal representation) of the mobile phone number in
+     **E.164 format (starting with country code)**. Optionally prefixed with '+'."""
+    apc_code: str = rest_field(name="apcCode")
+    """The code provided by APC in exchange for the operator code. Required."""
+
+    @overload
+    def __init__(
+        self,
+        *,
+        network_identifier: "_models.NetworkIdentifier",
+        apc_code: str,
+        phone_number: Optional[str] = None,
+        hashed_phone_number: Optional[str] = None,
+    ):
+        ...
+
+    @overload
+    def __init__(self, mapping: Mapping[str, Any]):
+        """
+        :param mapping: raw JSON to initialize the model.
+        :type mapping: Mapping[str, Any]
+        """
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:  # pylint: disable=useless-super-delegation
+        super().__init__(*args, **kwargs)
+
+
+class NumberVerificationWithoutCodeContent(_model_base.Model):
+    """Request to verify number of device - first call.
 
     All required parameters must be populated in order to send to server.
 
@@ -504,39 +492,7 @@ class NumberVerifyRequest(_model_base.Model):
         super().__init__(*args, **kwargs)
 
 
-class NumberVerifyResponse(_model_base.Model):
-    """Response verifying number of device.
-
-    All required parameters must be populated in order to send to server.
-
-    :ivar verification_result: True if number if the phone number matches the device, False
-     otherwise. Required.
-    :vartype verification_result: bool
-    """
-
-    verification_result: bool = rest_field(name="verificationResult")
-    """True if number if the phone number matches the device, False otherwise. Required."""
-
-    @overload
-    def __init__(
-        self,
-        *,
-        verification_result: bool,
-    ):
-        ...
-
-    @overload
-    def __init__(self, mapping: Mapping[str, Any]):
-        """
-        :param mapping: raw JSON to initialize the model.
-        :type mapping: Mapping[str, Any]
-        """
-
-    def __init__(self, *args: Any, **kwargs: Any) -> None:  # pylint: disable=useless-super-delegation
-        super().__init__(*args, **kwargs)
-
-
-class SimSwapRetrieveRequest(_model_base.Model):
+class SimSwapRetrievalContent(_model_base.Model):
     """Request to retrieve SimSwap date.
 
     All required parameters must be populated in order to send to server.
@@ -573,7 +529,7 @@ class SimSwapRetrieveRequest(_model_base.Model):
         super().__init__(*args, **kwargs)
 
 
-class SimSwapRetrieveResponse(_model_base.Model):
+class SimSwapRetrievalResult(_model_base.Model):
     """Response with SimSwap date.
 
     All required parameters must be populated in order to send to server.
@@ -604,7 +560,7 @@ class SimSwapRetrieveResponse(_model_base.Model):
         super().__init__(*args, **kwargs)
 
 
-class SimSwapVerifyRequest(_model_base.Model):
+class SimSwapVerificationContent(_model_base.Model):
     """Request to verify SimSwap in period.
 
     All required parameters must be populated in order to send to server.
@@ -646,7 +602,7 @@ class SimSwapVerifyRequest(_model_base.Model):
         super().__init__(*args, **kwargs)
 
 
-class SimSwapVerifyResponse(_model_base.Model):
+class SimSwapVerificationResult(_model_base.Model):
     """Response verifying SimSwap in period.
 
     All required parameters must be populated in order to send to server.

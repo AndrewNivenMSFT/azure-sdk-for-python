@@ -10,29 +10,29 @@ from enum import Enum
 from azure.core import CaseInsensitiveEnumMeta
 
 
-class LocationEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+class DeviceLocationEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Location static endpoint enum."""
 
-    LOCATION = "Location"
+    LOCATION = "location"
     """Static endpoint"""
 
 
-class NetworkEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+class DeviceNetworkEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Network static endpoint enum."""
 
-    NETWORK = "Network"
+    NETWORK = "network"
     """Static endpoint"""
 
 
-class NumberEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+class NumberVerificationEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Number static endpoint enum."""
 
-    NUMBER = "Number"
+    NUMBER = "number"
     """Static endpoint"""
 
 
 class SimSwapEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Number static endpoint enum."""
 
-    SIM_SWAP = "SimSwap"
+    SIM_SWAP = "sim-swap"
     """Static endpoint"""

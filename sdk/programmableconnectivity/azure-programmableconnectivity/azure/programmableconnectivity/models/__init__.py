@@ -6,52 +6,41 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from ._models import ApcErrorResponse
-from ._models import DeviceNetworkIdentifier
+from ._models import DeviceLocationVerificationContent
+from ._models import DeviceLocationVerificationResult
+from ._models import EmptyResponse
 from ._models import Ipv4Address
 from ._models import Ipv6Address
 from ._models import LocationDevice
-from ._models import LocationVerifyRequest
-from ._models import LocationVerifyResponse
-from ._models import Network
 from ._models import NetworkIdentifier
-from ._models import NumberRetrieveResponse
-from ._models import NumberVerifyRequest
-from ._models import NumberVerifyResponse
-from ._models import SimSwapRetrieveRequest
-from ._models import SimSwapRetrieveResponse
-from ._models import SimSwapVerifyRequest
-from ._models import SimSwapVerifyResponse
-
-from ._enums import LocationEnum
-from ._enums import NetworkEnum
-from ._enums import NumberEnum
-from ._enums import SimSwapEnum
+from ._models import NetworkRetrievalResult
+from ._models import NumberVerificationResult
+from ._models import NumberVerificationWithCodeContent
+from ._models import NumberVerificationWithoutCodeContent
+from ._models import SimSwapRetrievalContent
+from ._models import SimSwapRetrievalResult
+from ._models import SimSwapVerificationContent
+from ._models import SimSwapVerificationResult
 from ._patch import __all__ as _patch_all
 from ._patch import *  # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
-    "ApcErrorResponse",
-    "DeviceNetworkIdentifier",
+    "DeviceLocationVerificationContent",
+    "DeviceLocationVerificationResult",
+    "EmptyResponse",
     "Ipv4Address",
     "Ipv6Address",
     "LocationDevice",
-    "LocationVerifyRequest",
-    "LocationVerifyResponse",
-    "Network",
     "NetworkIdentifier",
-    "NumberRetrieveResponse",
-    "NumberVerifyRequest",
-    "NumberVerifyResponse",
-    "SimSwapRetrieveRequest",
-    "SimSwapRetrieveResponse",
-    "SimSwapVerifyRequest",
-    "SimSwapVerifyResponse",
-    "LocationEnum",
-    "NetworkEnum",
-    "NumberEnum",
-    "SimSwapEnum",
+    "NetworkRetrievalResult",
+    "NumberVerificationResult",
+    "NumberVerificationWithCodeContent",
+    "NumberVerificationWithoutCodeContent",
+    "SimSwapRetrievalContent",
+    "SimSwapRetrievalResult",
+    "SimSwapVerificationContent",
+    "SimSwapVerificationResult",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
 _patch_sdk()

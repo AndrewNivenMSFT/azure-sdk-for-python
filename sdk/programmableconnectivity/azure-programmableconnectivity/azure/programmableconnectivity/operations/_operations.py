@@ -40,22 +40,16 @@ _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
 
 
-def build_location_interface_verify_request(
-    location: Union[str, _models.LocationEnum], *, apc_gateway_id: str, api_version: str, **kwargs: Any
-) -> HttpRequest:
+def build_device_location_verify_request(*, apc_gateway_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2024-02-09-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
-    _url = "/DeviceLocation/{location}:verify"
-    path_format_arguments = {
-        "location": _SERIALIZER.url("location", location, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
+    _url = "/device-location/location:verify"
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -69,22 +63,16 @@ def build_location_interface_verify_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_networks_retrieve_request(
-    network: Union[str, _models.NetworkEnum], *, apc_gateway_id: str, api_version: str, **kwargs: Any
-) -> HttpRequest:
+def build_device_network_retrieve_request(*, apc_gateway_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2024-02-09-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
-    _url = "/DeviceNetwork/{network}:retrieve"
-    path_format_arguments = {
-        "network": _SERIALIZER.url("network", network, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
+    _url = "/device-network/network:retrieve"
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -98,22 +86,18 @@ def build_networks_retrieve_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_number_interface_verify_request(
-    number: Union[str, _models.NumberEnum], *, apc_gateway_id: str, api_version: str, **kwargs: Any
+def build_number_verification_verify_without_code_request(  # pylint: disable=name-too-long
+    *, apc_gateway_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2024-02-09-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
-    _url = "/NumberVerification/{number}:verify"
-    path_format_arguments = {
-        "number": _SERIALIZER.url("number", number, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
+    _url = "/number-verification/number:verify"
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -127,22 +111,18 @@ def build_number_interface_verify_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_number_interface_retrieve_request(
-    number: Union[str, _models.NumberEnum], *, apc_gateway_id: str, api_version: str, **kwargs: Any
+def build_number_verification_verify_with_code_request(  # pylint: disable=name-too-long
+    *, apc_gateway_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2024-02-09-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
-    _url = "/NumberVerification/{number}:retrieve"
-    path_format_arguments = {
-        "number": _SERIALIZER.url("number", number, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
+    _url = "/number-verification/number:verify"
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -156,22 +136,16 @@ def build_number_interface_retrieve_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_sim_swap_interface_retrieve_request(  # pylint: disable=name-too-long
-    sim_swap: Union[str, _models.SimSwapEnum], *, apc_gateway_id: str, api_version: str, **kwargs: Any
-) -> HttpRequest:
+def build_sim_swap_retrieve_request(*, apc_gateway_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2024-02-09-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
-    _url = "/SimSwap/{simSwap}:retrieve"
-    path_format_arguments = {
-        "simSwap": _SERIALIZER.url("sim_swap", sim_swap, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
+    _url = "/sim-swap/sim-swap:retrieve"
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -185,22 +159,16 @@ def build_sim_swap_interface_retrieve_request(  # pylint: disable=name-too-long
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_sim_swap_interface_verify_request(
-    sim_swap: Union[str, _models.SimSwapEnum], *, apc_gateway_id: str, api_version: str, **kwargs: Any
-) -> HttpRequest:
+def build_sim_swap_verify_request(*, apc_gateway_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2024-02-09-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
-    _url = "/SimSwap/{simSwap}:verify"
-    path_format_arguments = {
-        "simSwap": _SERIALIZER.url("sim_swap", sim_swap, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
+    _url = "/sim-swap/sim-swap:verify"
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -214,14 +182,14 @@ def build_sim_swap_interface_verify_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-class LocationInterfaceOperations:
+class DeviceLocationOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.programmableconnectivity.ProgrammableConnectivityClient`'s
-        :attr:`location_interface` attribute.
+        :attr:`device_location` attribute.
     """
 
     def __init__(self, *args, **kwargs):
@@ -234,31 +202,27 @@ class LocationInterfaceOperations:
     @overload
     def verify(
         self,
-        location: Union[str, _models.LocationEnum],
-        body: _models.LocationVerifyRequest,
+        body: _models.DeviceLocationVerificationContent,
         *,
         apc_gateway_id: str,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.LocationVerifyResponse:
+    ) -> _models.DeviceLocationVerificationResult:
         # pylint: disable=line-too-long
         """Verifies whether a device is within a specified location area, defined as an accuracy (radius)
         around a point, specified by longitude and latitude.
 
-        :param location: Static endpoint. "Location" Required.
-        :type location: str or ~azure.programmableconnectivity.models.LocationEnum
         :param body: Required.
-        :type body: ~azure.programmableconnectivity.models.LocationVerifyRequest
+        :type body: ~azure.programmableconnectivity.models.DeviceLocationVerificationContent
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
          request. Required.
         :paramtype apc_gateway_id: str
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
-        :keyword bool stream: Whether to stream the response of this operation. Defaults to False. You
-         will have to context manage the returned stream.
-        :return: LocationVerifyResponse. The LocationVerifyResponse is compatible with MutableMapping
-        :rtype: ~azure.programmableconnectivity.models.LocationVerifyResponse
+        :return: DeviceLocationVerificationResult. The DeviceLocationVerificationResult is compatible
+         with MutableMapping
+        :rtype: ~azure.programmableconnectivity.models.DeviceLocationVerificationResult
         :raises ~azure.core.exceptions.HttpResponseError:
 
         Example:
@@ -315,19 +279,11 @@ class LocationInterfaceOperations:
 
     @overload
     def verify(
-        self,
-        location: Union[str, _models.LocationEnum],
-        body: JSON,
-        *,
-        apc_gateway_id: str,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.LocationVerifyResponse:
+        self, body: JSON, *, apc_gateway_id: str, content_type: str = "application/json", **kwargs: Any
+    ) -> _models.DeviceLocationVerificationResult:
         """Verifies whether a device is within a specified location area, defined as an accuracy (radius)
         around a point, specified by longitude and latitude.
 
-        :param location: Static endpoint. "Location" Required.
-        :type location: str or ~azure.programmableconnectivity.models.LocationEnum
         :param body: Required.
         :type body: JSON
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -336,10 +292,9 @@ class LocationInterfaceOperations:
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
-        :keyword bool stream: Whether to stream the response of this operation. Defaults to False. You
-         will have to context manage the returned stream.
-        :return: LocationVerifyResponse. The LocationVerifyResponse is compatible with MutableMapping
-        :rtype: ~azure.programmableconnectivity.models.LocationVerifyResponse
+        :return: DeviceLocationVerificationResult. The DeviceLocationVerificationResult is compatible
+         with MutableMapping
+        :rtype: ~azure.programmableconnectivity.models.DeviceLocationVerificationResult
         :raises ~azure.core.exceptions.HttpResponseError:
 
         Example:
@@ -354,19 +309,11 @@ class LocationInterfaceOperations:
 
     @overload
     def verify(
-        self,
-        location: Union[str, _models.LocationEnum],
-        body: IO[bytes],
-        *,
-        apc_gateway_id: str,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.LocationVerifyResponse:
+        self, body: IO[bytes], *, apc_gateway_id: str, content_type: str = "application/json", **kwargs: Any
+    ) -> _models.DeviceLocationVerificationResult:
         """Verifies whether a device is within a specified location area, defined as an accuracy (radius)
         around a point, specified by longitude and latitude.
 
-        :param location: Static endpoint. "Location" Required.
-        :type location: str or ~azure.programmableconnectivity.models.LocationEnum
         :param body: Required.
         :type body: IO[bytes]
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -375,10 +322,9 @@ class LocationInterfaceOperations:
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
-        :keyword bool stream: Whether to stream the response of this operation. Defaults to False. You
-         will have to context manage the returned stream.
-        :return: LocationVerifyResponse. The LocationVerifyResponse is compatible with MutableMapping
-        :rtype: ~azure.programmableconnectivity.models.LocationVerifyResponse
+        :return: DeviceLocationVerificationResult. The DeviceLocationVerificationResult is compatible
+         with MutableMapping
+        :rtype: ~azure.programmableconnectivity.models.DeviceLocationVerificationResult
         :raises ~azure.core.exceptions.HttpResponseError:
 
         Example:
@@ -394,30 +340,25 @@ class LocationInterfaceOperations:
     @distributed_trace
     def verify(
         self,
-        location: Union[str, _models.LocationEnum],
-        body: Union[_models.LocationVerifyRequest, JSON, IO[bytes]],
+        body: Union[_models.DeviceLocationVerificationContent, JSON, IO[bytes]],
         *,
         apc_gateway_id: str,
         **kwargs: Any
-    ) -> _models.LocationVerifyResponse:
+    ) -> _models.DeviceLocationVerificationResult:
         # pylint: disable=line-too-long
         """Verifies whether a device is within a specified location area, defined as an accuracy (radius)
         around a point, specified by longitude and latitude.
 
-        :param location: Static endpoint. "Location" Required.
-        :type location: str or ~azure.programmableconnectivity.models.LocationEnum
-        :param body: Is one of the following types: LocationVerifyRequest, JSON, IO[bytes] Required.
-        :type body: ~azure.programmableconnectivity.models.LocationVerifyRequest or JSON or IO[bytes]
+        :param body: Is one of the following types: DeviceLocationVerificationContent, JSON, IO[bytes]
+         Required.
+        :type body: ~azure.programmableconnectivity.models.DeviceLocationVerificationContent or JSON or
+         IO[bytes]
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
          request. Required.
         :paramtype apc_gateway_id: str
-        :keyword content_type: Body parameter Content-Type. Known values are: application/json. Default
-         value is None.
-        :paramtype content_type: str
-        :keyword bool stream: Whether to stream the response of this operation. Defaults to False. You
-         will have to context manage the returned stream.
-        :return: LocationVerifyResponse. The LocationVerifyResponse is compatible with MutableMapping
-        :rtype: ~azure.programmableconnectivity.models.LocationVerifyResponse
+        :return: DeviceLocationVerificationResult. The DeviceLocationVerificationResult is compatible
+         with MutableMapping
+        :rtype: ~azure.programmableconnectivity.models.DeviceLocationVerificationResult
         :raises ~azure.core.exceptions.HttpResponseError:
 
         Example:
@@ -483,7 +424,7 @@ class LocationInterfaceOperations:
         _params = kwargs.pop("params", {}) or {}
 
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.LocationVerifyResponse] = kwargs.pop("cls", None)
+        cls: ClsType[_models.DeviceLocationVerificationResult] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _content = None
@@ -492,11 +433,10 @@ class LocationInterfaceOperations:
         else:
             _content = json.dumps(body, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
 
-        _request = build_location_interface_verify_request(
-            location=location,
+        _request = build_device_location_verify_request(
             apc_gateway_id=apc_gateway_id,
-            api_version=self._config.api_version,
             content_type=content_type,
+            api_version=self._config.api_version,
             content=_content,
             headers=_headers,
             params=_params,
@@ -517,18 +457,18 @@ class LocationInterfaceOperations:
             if _stream:
                 response.read()  # Load the body in memory and close the socket
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _deserialize(_models.ApcErrorResponse, response.json())
-            raise HttpResponseError(response=response, model=error)
+            raise HttpResponseError(response=response)
 
         response_headers = {}
         response_headers["x-ms-client-request-id"] = self._deserialize(
             "str", response.headers.get("x-ms-client-request-id")
         )
+        response_headers["x-ms-request-id"] = self._deserialize("str", response.headers.get("x-ms-request-id"))
 
         if _stream:
             deserialized = response.iter_bytes()
         else:
-            deserialized = _deserialize(_models.LocationVerifyResponse, response.json())
+            deserialized = _deserialize(_models.DeviceLocationVerificationResult, response.json())
 
         if cls:
             return cls(pipeline_response, deserialized, response_headers)  # type: ignore
@@ -536,14 +476,14 @@ class LocationInterfaceOperations:
         return deserialized  # type: ignore
 
 
-class NetworksOperations:
+class DeviceNetworkOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.programmableconnectivity.ProgrammableConnectivityClient`'s
-        :attr:`networks` attribute.
+        :attr:`device_network` attribute.
     """
 
     def __init__(self, *args, **kwargs):
@@ -556,524 +496,16 @@ class NetworksOperations:
     @overload
     def retrieve(
         self,
-        network: Union[str, _models.NetworkEnum],
-        body: _models.DeviceNetworkIdentifier,
-        *,
-        apc_gateway_id: str,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.Network:
-        # pylint: disable=line-too-long
-        """Retrieves the network a given device is on. Returns network in a networkCode format that can be
-        used for other APIs.
-
-        :param network: Static endpoint. "Network" Required.
-        :type network: str or ~azure.programmableconnectivity.models.NetworkEnum
-        :param body: Required.
-        :type body: ~azure.programmableconnectivity.models.DeviceNetworkIdentifier
-        :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
-         request. Required.
-        :paramtype apc_gateway_id: str
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword bool stream: Whether to stream the response of this operation. Defaults to False. You
-         will have to context manage the returned stream.
-        :return: Network. The Network is compatible with MutableMapping
-        :rtype: ~azure.programmableconnectivity.models.Network
-        :raises ~azure.core.exceptions.HttpResponseError:
-
-        Example:
-            .. code-block:: python
-
-                # JSON input template you can fill out and use as your body input.
-                body = {
-                    "deviceIdentifier": "str",  # The device identifier in a format matching the
-                      type above:   * IPv4 in dotted-quad format. * IPV6 in IETF 5952 format. Required.
-                    "identifierType": "str"  # The type of device identifier given: 'IPv4' or
-                      'IPv6'. Required.
-                }
-
-                # response body for status code(s): 200
-                response == {
-                    "networkCode": "str"  # The identifier for the network. This can be used as
-                      the networkIdentifier for the service APIs. Required.
-                }
-        """
-
-    @overload
-    def retrieve(
-        self,
-        network: Union[str, _models.NetworkEnum],
-        body: JSON,
-        *,
-        apc_gateway_id: str,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.Network:
-        # pylint: disable=line-too-long
-        """Retrieves the network a given device is on. Returns network in a networkCode format that can be
-        used for other APIs.
-
-        :param network: Static endpoint. "Network" Required.
-        :type network: str or ~azure.programmableconnectivity.models.NetworkEnum
-        :param body: Required.
-        :type body: JSON
-        :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
-         request. Required.
-        :paramtype apc_gateway_id: str
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword bool stream: Whether to stream the response of this operation. Defaults to False. You
-         will have to context manage the returned stream.
-        :return: Network. The Network is compatible with MutableMapping
-        :rtype: ~azure.programmableconnectivity.models.Network
-        :raises ~azure.core.exceptions.HttpResponseError:
-
-        Example:
-            .. code-block:: python
-
-                # response body for status code(s): 200
-                response == {
-                    "networkCode": "str"  # The identifier for the network. This can be used as
-                      the networkIdentifier for the service APIs. Required.
-                }
-        """
-
-    @overload
-    def retrieve(
-        self,
-        network: Union[str, _models.NetworkEnum],
-        body: IO[bytes],
-        *,
-        apc_gateway_id: str,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.Network:
-        # pylint: disable=line-too-long
-        """Retrieves the network a given device is on. Returns network in a networkCode format that can be
-        used for other APIs.
-
-        :param network: Static endpoint. "Network" Required.
-        :type network: str or ~azure.programmableconnectivity.models.NetworkEnum
-        :param body: Required.
-        :type body: IO[bytes]
-        :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
-         request. Required.
-        :paramtype apc_gateway_id: str
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword bool stream: Whether to stream the response of this operation. Defaults to False. You
-         will have to context manage the returned stream.
-        :return: Network. The Network is compatible with MutableMapping
-        :rtype: ~azure.programmableconnectivity.models.Network
-        :raises ~azure.core.exceptions.HttpResponseError:
-
-        Example:
-            .. code-block:: python
-
-                # response body for status code(s): 200
-                response == {
-                    "networkCode": "str"  # The identifier for the network. This can be used as
-                      the networkIdentifier for the service APIs. Required.
-                }
-        """
-
-    @distributed_trace
-    def retrieve(
-        self,
-        network: Union[str, _models.NetworkEnum],
-        body: Union[_models.DeviceNetworkIdentifier, JSON, IO[bytes]],
-        *,
-        apc_gateway_id: str,
-        **kwargs: Any
-    ) -> _models.Network:
-        # pylint: disable=line-too-long
-        """Retrieves the network a given device is on. Returns network in a networkCode format that can be
-        used for other APIs.
-
-        :param network: Static endpoint. "Network" Required.
-        :type network: str or ~azure.programmableconnectivity.models.NetworkEnum
-        :param body: Is one of the following types: DeviceNetworkIdentifier, JSON, IO[bytes] Required.
-        :type body: ~azure.programmableconnectivity.models.DeviceNetworkIdentifier or JSON or IO[bytes]
-        :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
-         request. Required.
-        :paramtype apc_gateway_id: str
-        :keyword content_type: Body parameter Content-Type. Known values are: application/json. Default
-         value is None.
-        :paramtype content_type: str
-        :keyword bool stream: Whether to stream the response of this operation. Defaults to False. You
-         will have to context manage the returned stream.
-        :return: Network. The Network is compatible with MutableMapping
-        :rtype: ~azure.programmableconnectivity.models.Network
-        :raises ~azure.core.exceptions.HttpResponseError:
-
-        Example:
-            .. code-block:: python
-
-                # JSON input template you can fill out and use as your body input.
-                body = {
-                    "deviceIdentifier": "str",  # The device identifier in a format matching the
-                      type above:   * IPv4 in dotted-quad format. * IPV6 in IETF 5952 format. Required.
-                    "identifierType": "str"  # The type of device identifier given: 'IPv4' or
-                      'IPv6'. Required.
-                }
-
-                # response body for status code(s): 200
-                response == {
-                    "networkCode": "str"  # The identifier for the network. This can be used as
-                      the networkIdentifier for the service APIs. Required.
-                }
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = kwargs.pop("params", {}) or {}
-
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.Network] = kwargs.pop("cls", None)
-
-        content_type = content_type or "application/json"
-        _content = None
-        if isinstance(body, (IOBase, bytes)):
-            _content = body
-        else:
-            _content = json.dumps(body, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
-
-        _request = build_networks_retrieve_request(
-            network=network,
-            apc_gateway_id=apc_gateway_id,
-            api_version=self._config.api_version,
-            content_type=content_type,
-            content=_content,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
-        }
-        _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-        _stream = kwargs.pop("stream", False)
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            if _stream:
-                response.read()  # Load the body in memory and close the socket
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _deserialize(_models.ApcErrorResponse, response.json())
-            raise HttpResponseError(response=response, model=error)
-
-        response_headers = {}
-        response_headers["x-ms-client-request-id"] = self._deserialize(
-            "str", response.headers.get("x-ms-client-request-id")
-        )
-
-        if _stream:
-            deserialized = response.iter_bytes()
-        else:
-            deserialized = _deserialize(_models.Network, response.json())
-
-        if cls:
-            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-
-        return deserialized  # type: ignore
-
-
-class NumberInterfaceOperations:
-    """
-    .. warning::
-        **DO NOT** instantiate this class directly.
-
-        Instead, you should access the following operations through
-        :class:`~azure.programmableconnectivity.ProgrammableConnectivityClient`'s
-        :attr:`number_interface` attribute.
-    """
-
-    def __init__(self, *args, **kwargs):
-        input_args = list(args)
-        self._client = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config = input_args.pop(0) if input_args else kwargs.pop("config")
-        self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
-        self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
-
-    @overload
-    def verify(
-        self,
-        number: Union[str, _models.NumberEnum],
-        body: _models.NumberVerifyRequest,
-        *,
-        apc_gateway_id: str,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.NumberVerifyResponse:
-        # pylint: disable=line-too-long
-        """Verifies the phone number (MSISDN) associated with a device.
-
-        :param number: Static endpoint. "Number" Required.
-        :type number: str or ~azure.programmableconnectivity.models.NumberEnum
-        :param body: Required.
-        :type body: ~azure.programmableconnectivity.models.NumberVerifyRequest
-        :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
-         request. Required.
-        :paramtype apc_gateway_id: str
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword bool stream: Whether to stream the response of this operation. Defaults to False. You
-         will have to context manage the returned stream.
-        :return: NumberVerifyResponse. The NumberVerifyResponse is compatible with MutableMapping
-        :rtype: ~azure.programmableconnectivity.models.NumberVerifyResponse
-        :raises ~azure.core.exceptions.HttpResponseError:
-
-        Example:
-            .. code-block:: python
-
-                # JSON input template you can fill out and use as your body input.
-                body = {
-                    "networkIdentifier": {
-                        "identifier": "str",  # The network identifier in a format matching
-                          the type above:   * IPv4 of a device in dotted-quad form 1.2.3.4. * IPv6 of a
-                          device in IETF 5952 format. * NetworkCode matching our documentation or an
-                          output from /Network:retrieve.". Required.
-                        "identifierType": "str"  # The type of identifier for the network.
-                          one of: 'IPv4', 'IPv6', 'NetworkCode'. Required.
-                    },
-                    "hashedPhoneNumber": "str",  # Optional. Hashed phone number. SHA-256 (in
-                      hexadecimal representation) of the mobile phone number in **E.164 format
-                      (starting with country code)**. Optionally prefixed with '+'.
-                    "phoneNumber": "str"  # Optional. Phone number in E.164 format (starting with
-                      country code), and optionally prefixed with '+'.
-                }
-
-                # response body for status code(s): 200
-                response == {
-                    "verificationResult": bool  # True if number if the phone number matches the
-                      device, False otherwise. Required.
-                }
-        """
-
-    @overload
-    def verify(
-        self,
-        number: Union[str, _models.NumberEnum],
-        body: JSON,
-        *,
-        apc_gateway_id: str,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.NumberVerifyResponse:
-        """Verifies the phone number (MSISDN) associated with a device.
-
-        :param number: Static endpoint. "Number" Required.
-        :type number: str or ~azure.programmableconnectivity.models.NumberEnum
-        :param body: Required.
-        :type body: JSON
-        :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
-         request. Required.
-        :paramtype apc_gateway_id: str
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword bool stream: Whether to stream the response of this operation. Defaults to False. You
-         will have to context manage the returned stream.
-        :return: NumberVerifyResponse. The NumberVerifyResponse is compatible with MutableMapping
-        :rtype: ~azure.programmableconnectivity.models.NumberVerifyResponse
-        :raises ~azure.core.exceptions.HttpResponseError:
-
-        Example:
-            .. code-block:: python
-
-                # response body for status code(s): 200
-                response == {
-                    "verificationResult": bool  # True if number if the phone number matches the
-                      device, False otherwise. Required.
-                }
-        """
-
-    @overload
-    def verify(
-        self,
-        number: Union[str, _models.NumberEnum],
-        body: IO[bytes],
-        *,
-        apc_gateway_id: str,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.NumberVerifyResponse:
-        """Verifies the phone number (MSISDN) associated with a device.
-
-        :param number: Static endpoint. "Number" Required.
-        :type number: str or ~azure.programmableconnectivity.models.NumberEnum
-        :param body: Required.
-        :type body: IO[bytes]
-        :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
-         request. Required.
-        :paramtype apc_gateway_id: str
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword bool stream: Whether to stream the response of this operation. Defaults to False. You
-         will have to context manage the returned stream.
-        :return: NumberVerifyResponse. The NumberVerifyResponse is compatible with MutableMapping
-        :rtype: ~azure.programmableconnectivity.models.NumberVerifyResponse
-        :raises ~azure.core.exceptions.HttpResponseError:
-
-        Example:
-            .. code-block:: python
-
-                # response body for status code(s): 200
-                response == {
-                    "verificationResult": bool  # True if number if the phone number matches the
-                      device, False otherwise. Required.
-                }
-        """
-
-    @distributed_trace
-    def verify(
-        self,
-        number: Union[str, _models.NumberEnum],
-        body: Union[_models.NumberVerifyRequest, JSON, IO[bytes]],
-        *,
-        apc_gateway_id: str,
-        **kwargs: Any
-    ) -> _models.NumberVerifyResponse:
-        # pylint: disable=line-too-long
-        """Verifies the phone number (MSISDN) associated with a device.
-
-        :param number: Static endpoint. "Number" Required.
-        :type number: str or ~azure.programmableconnectivity.models.NumberEnum
-        :param body: Is one of the following types: NumberVerifyRequest, JSON, IO[bytes] Required.
-        :type body: ~azure.programmableconnectivity.models.NumberVerifyRequest or JSON or IO[bytes]
-        :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
-         request. Required.
-        :paramtype apc_gateway_id: str
-        :keyword content_type: Body parameter Content-Type. Known values are: application/json. Default
-         value is None.
-        :paramtype content_type: str
-        :keyword bool stream: Whether to stream the response of this operation. Defaults to False. You
-         will have to context manage the returned stream.
-        :return: NumberVerifyResponse. The NumberVerifyResponse is compatible with MutableMapping
-        :rtype: ~azure.programmableconnectivity.models.NumberVerifyResponse
-        :raises ~azure.core.exceptions.HttpResponseError:
-
-        Example:
-            .. code-block:: python
-
-                # JSON input template you can fill out and use as your body input.
-                body = {
-                    "networkIdentifier": {
-                        "identifier": "str",  # The network identifier in a format matching
-                          the type above:   * IPv4 of a device in dotted-quad form 1.2.3.4. * IPv6 of a
-                          device in IETF 5952 format. * NetworkCode matching our documentation or an
-                          output from /Network:retrieve.". Required.
-                        "identifierType": "str"  # The type of identifier for the network.
-                          one of: 'IPv4', 'IPv6', 'NetworkCode'. Required.
-                    },
-                    "hashedPhoneNumber": "str",  # Optional. Hashed phone number. SHA-256 (in
-                      hexadecimal representation) of the mobile phone number in **E.164 format
-                      (starting with country code)**. Optionally prefixed with '+'.
-                    "phoneNumber": "str"  # Optional. Phone number in E.164 format (starting with
-                      country code), and optionally prefixed with '+'.
-                }
-
-                # response body for status code(s): 200
-                response == {
-                    "verificationResult": bool  # True if number if the phone number matches the
-                      device, False otherwise. Required.
-                }
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = kwargs.pop("params", {}) or {}
-
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.NumberVerifyResponse] = kwargs.pop("cls", None)
-
-        content_type = content_type or "application/json"
-        _content = None
-        if isinstance(body, (IOBase, bytes)):
-            _content = body
-        else:
-            _content = json.dumps(body, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
-
-        _request = build_number_interface_verify_request(
-            number=number,
-            apc_gateway_id=apc_gateway_id,
-            api_version=self._config.api_version,
-            content_type=content_type,
-            content=_content,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
-        }
-        _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-        _stream = kwargs.pop("stream", False)
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            if _stream:
-                response.read()  # Load the body in memory and close the socket
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _deserialize(_models.ApcErrorResponse, response.json())
-            raise HttpResponseError(response=response, model=error)
-
-        response_headers = {}
-        response_headers["x-ms-client-request-id"] = self._deserialize(
-            "str", response.headers.get("x-ms-client-request-id")
-        )
-
-        if _stream:
-            deserialized = response.iter_bytes()
-        else:
-            deserialized = _deserialize(_models.NumberVerifyResponse, response.json())
-
-        if cls:
-            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @overload
-    def retrieve(
-        self,
-        number: Union[str, _models.NumberEnum],
         body: _models.NetworkIdentifier,
         *,
         apc_gateway_id: str,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.NumberRetrieveResponse:
+    ) -> _models.NetworkRetrievalResult:
         # pylint: disable=line-too-long
-        """Retrieves the phone number (MSISDN) associated with a device.
+        """Retrieves the network a given device is on. Returns network in a networkCode format that can be
+        used for other APIs.
 
-        :param number: Static endpoint. "Number" Required.
-        :type number: str or ~azure.programmableconnectivity.models.NumberEnum
         :param body: Required.
         :type body: ~azure.programmableconnectivity.models.NetworkIdentifier
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -1082,10 +514,8 @@ class NumberInterfaceOperations:
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
-        :keyword bool stream: Whether to stream the response of this operation. Defaults to False. You
-         will have to context manage the returned stream.
-        :return: NumberRetrieveResponse. The NumberRetrieveResponse is compatible with MutableMapping
-        :rtype: ~azure.programmableconnectivity.models.NumberRetrieveResponse
+        :return: NetworkRetrievalResult. The NetworkRetrievalResult is compatible with MutableMapping
+        :rtype: ~azure.programmableconnectivity.models.NetworkRetrievalResult
         :raises ~azure.core.exceptions.HttpResponseError:
 
         Example:
@@ -1103,26 +533,19 @@ class NumberInterfaceOperations:
 
                 # response body for status code(s): 200
                 response == {
-                    "phoneNumber": "str"  # Phone number in E.164 format (starting with country
-                      code), and optionally prefixed with '+'. Required.
+                    "networkCode": "str"  # The identifier for the network. This can be used as
+                      the networkIdentifier for the service APIs. Required.
                 }
         """
 
     @overload
     def retrieve(
-        self,
-        number: Union[str, _models.NumberEnum],
-        body: JSON,
-        *,
-        apc_gateway_id: str,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.NumberRetrieveResponse:
+        self, body: JSON, *, apc_gateway_id: str, content_type: str = "application/json", **kwargs: Any
+    ) -> _models.NetworkRetrievalResult:
         # pylint: disable=line-too-long
-        """Retrieves the phone number (MSISDN) associated with a device.
+        """Retrieves the network a given device is on. Returns network in a networkCode format that can be
+        used for other APIs.
 
-        :param number: Static endpoint. "Number" Required.
-        :type number: str or ~azure.programmableconnectivity.models.NumberEnum
         :param body: Required.
         :type body: JSON
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -1131,10 +554,8 @@ class NumberInterfaceOperations:
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
-        :keyword bool stream: Whether to stream the response of this operation. Defaults to False. You
-         will have to context manage the returned stream.
-        :return: NumberRetrieveResponse. The NumberRetrieveResponse is compatible with MutableMapping
-        :rtype: ~azure.programmableconnectivity.models.NumberRetrieveResponse
+        :return: NetworkRetrievalResult. The NetworkRetrievalResult is compatible with MutableMapping
+        :rtype: ~azure.programmableconnectivity.models.NetworkRetrievalResult
         :raises ~azure.core.exceptions.HttpResponseError:
 
         Example:
@@ -1142,26 +563,19 @@ class NumberInterfaceOperations:
 
                 # response body for status code(s): 200
                 response == {
-                    "phoneNumber": "str"  # Phone number in E.164 format (starting with country
-                      code), and optionally prefixed with '+'. Required.
+                    "networkCode": "str"  # The identifier for the network. This can be used as
+                      the networkIdentifier for the service APIs. Required.
                 }
         """
 
     @overload
     def retrieve(
-        self,
-        number: Union[str, _models.NumberEnum],
-        body: IO[bytes],
-        *,
-        apc_gateway_id: str,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.NumberRetrieveResponse:
+        self, body: IO[bytes], *, apc_gateway_id: str, content_type: str = "application/json", **kwargs: Any
+    ) -> _models.NetworkRetrievalResult:
         # pylint: disable=line-too-long
-        """Retrieves the phone number (MSISDN) associated with a device.
+        """Retrieves the network a given device is on. Returns network in a networkCode format that can be
+        used for other APIs.
 
-        :param number: Static endpoint. "Number" Required.
-        :type number: str or ~azure.programmableconnectivity.models.NumberEnum
         :param body: Required.
         :type body: IO[bytes]
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -1170,10 +584,8 @@ class NumberInterfaceOperations:
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
-        :keyword bool stream: Whether to stream the response of this operation. Defaults to False. You
-         will have to context manage the returned stream.
-        :return: NumberRetrieveResponse. The NumberRetrieveResponse is compatible with MutableMapping
-        :rtype: ~azure.programmableconnectivity.models.NumberRetrieveResponse
+        :return: NetworkRetrievalResult. The NetworkRetrievalResult is compatible with MutableMapping
+        :rtype: ~azure.programmableconnectivity.models.NetworkRetrievalResult
         :raises ~azure.core.exceptions.HttpResponseError:
 
         Example:
@@ -1181,37 +593,26 @@ class NumberInterfaceOperations:
 
                 # response body for status code(s): 200
                 response == {
-                    "phoneNumber": "str"  # Phone number in E.164 format (starting with country
-                      code), and optionally prefixed with '+'. Required.
+                    "networkCode": "str"  # The identifier for the network. This can be used as
+                      the networkIdentifier for the service APIs. Required.
                 }
         """
 
     @distributed_trace
     def retrieve(
-        self,
-        number: Union[str, _models.NumberEnum],
-        body: Union[_models.NetworkIdentifier, JSON, IO[bytes]],
-        *,
-        apc_gateway_id: str,
-        **kwargs: Any
-    ) -> _models.NumberRetrieveResponse:
+        self, body: Union[_models.NetworkIdentifier, JSON, IO[bytes]], *, apc_gateway_id: str, **kwargs: Any
+    ) -> _models.NetworkRetrievalResult:
         # pylint: disable=line-too-long
-        """Retrieves the phone number (MSISDN) associated with a device.
+        """Retrieves the network a given device is on. Returns network in a networkCode format that can be
+        used for other APIs.
 
-        :param number: Static endpoint. "Number" Required.
-        :type number: str or ~azure.programmableconnectivity.models.NumberEnum
         :param body: Is one of the following types: NetworkIdentifier, JSON, IO[bytes] Required.
         :type body: ~azure.programmableconnectivity.models.NetworkIdentifier or JSON or IO[bytes]
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
          request. Required.
         :paramtype apc_gateway_id: str
-        :keyword content_type: Body parameter Content-Type. Known values are: application/json. Default
-         value is None.
-        :paramtype content_type: str
-        :keyword bool stream: Whether to stream the response of this operation. Defaults to False. You
-         will have to context manage the returned stream.
-        :return: NumberRetrieveResponse. The NumberRetrieveResponse is compatible with MutableMapping
-        :rtype: ~azure.programmableconnectivity.models.NumberRetrieveResponse
+        :return: NetworkRetrievalResult. The NetworkRetrievalResult is compatible with MutableMapping
+        :rtype: ~azure.programmableconnectivity.models.NetworkRetrievalResult
         :raises ~azure.core.exceptions.HttpResponseError:
 
         Example:
@@ -1229,8 +630,8 @@ class NumberInterfaceOperations:
 
                 # response body for status code(s): 200
                 response == {
-                    "phoneNumber": "str"  # Phone number in E.164 format (starting with country
-                      code), and optionally prefixed with '+'. Required.
+                    "networkCode": "str"  # The identifier for the network. This can be used as
+                      the networkIdentifier for the service APIs. Required.
                 }
         """
         error_map = {
@@ -1245,7 +646,7 @@ class NumberInterfaceOperations:
         _params = kwargs.pop("params", {}) or {}
 
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.NumberRetrieveResponse] = kwargs.pop("cls", None)
+        cls: ClsType[_models.NetworkRetrievalResult] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _content = None
@@ -1254,11 +655,10 @@ class NumberInterfaceOperations:
         else:
             _content = json.dumps(body, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
 
-        _request = build_number_interface_retrieve_request(
-            number=number,
+        _request = build_device_network_retrieve_request(
             apc_gateway_id=apc_gateway_id,
-            api_version=self._config.api_version,
             content_type=content_type,
+            api_version=self._config.api_version,
             content=_content,
             headers=_headers,
             params=_params,
@@ -1279,18 +679,18 @@ class NumberInterfaceOperations:
             if _stream:
                 response.read()  # Load the body in memory and close the socket
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _deserialize(_models.ApcErrorResponse, response.json())
-            raise HttpResponseError(response=response, model=error)
+            raise HttpResponseError(response=response)
 
         response_headers = {}
         response_headers["x-ms-client-request-id"] = self._deserialize(
             "str", response.headers.get("x-ms-client-request-id")
         )
+        response_headers["x-ms-request-id"] = self._deserialize("str", response.headers.get("x-ms-request-id"))
 
         if _stream:
             deserialized = response.iter_bytes()
         else:
-            deserialized = _deserialize(_models.NumberRetrieveResponse, response.json())
+            deserialized = _deserialize(_models.NetworkRetrievalResult, response.json())
 
         if cls:
             return cls(pipeline_response, deserialized, response_headers)  # type: ignore
@@ -1298,14 +698,477 @@ class NumberInterfaceOperations:
         return deserialized  # type: ignore
 
 
-class SimSwapInterfaceOperations:
+class NumberVerificationOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.programmableconnectivity.ProgrammableConnectivityClient`'s
-        :attr:`sim_swap_interface` attribute.
+        :attr:`number_verification` attribute.
+    """
+
+    def __init__(self, *args, **kwargs):
+        input_args = list(args)
+        self._client = input_args.pop(0) if input_args else kwargs.pop("client")
+        self._config = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
+        self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
+
+    @overload
+    def verify_without_code(
+        self,
+        body: _models.NumberVerificationWithoutCodeContent,
+        *,
+        apc_gateway_id: str,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.EmptyResponse:
+        # pylint: disable=line-too-long
+        """Verifies the phone number (MSISDN) associated with a device. As part of the frontend
+        authorization flow, the device is redirected to the operator network to authenticate directly.
+
+        :param body: Required.
+        :type body: ~azure.programmableconnectivity.models.NumberVerificationWithoutCodeContent
+        :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
+         request. Required.
+        :paramtype apc_gateway_id: str
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: EmptyResponse. The EmptyResponse is compatible with MutableMapping
+        :rtype: ~azure.programmableconnectivity.models.EmptyResponse
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # JSON input template you can fill out and use as your body input.
+                body = {
+                    "networkIdentifier": {
+                        "identifier": "str",  # The network identifier in a format matching
+                          the type above:   * IPv4 of a device in dotted-quad form 1.2.3.4. * IPv6 of a
+                          device in IETF 5952 format. * NetworkCode matching our documentation or an
+                          output from /Network:retrieve.". Required.
+                        "identifierType": "str"  # The type of identifier for the network.
+                          one of: 'IPv4', 'IPv6', 'NetworkCode'. Required.
+                    },
+                    "hashedPhoneNumber": "str",  # Optional. Hashed phone number. SHA-256 (in
+                      hexadecimal representation) of the mobile phone number in **E.164 format
+                      (starting with country code)**. Optionally prefixed with '+'.
+                    "phoneNumber": "str"  # Optional. Phone number in E.164 format (starting with
+                      country code), and optionally prefixed with '+'.
+                }
+
+                # response body for status code(s): 302
+                response == {
+                    "content": "str"  # Optional. Optional content.
+                }
+        """
+
+    @overload
+    def verify_without_code(
+        self, body: JSON, *, apc_gateway_id: str, content_type: str = "application/json", **kwargs: Any
+    ) -> _models.EmptyResponse:
+        """Verifies the phone number (MSISDN) associated with a device. As part of the frontend
+        authorization flow, the device is redirected to the operator network to authenticate directly.
+
+        :param body: Required.
+        :type body: JSON
+        :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
+         request. Required.
+        :paramtype apc_gateway_id: str
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: EmptyResponse. The EmptyResponse is compatible with MutableMapping
+        :rtype: ~azure.programmableconnectivity.models.EmptyResponse
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 302
+                response == {
+                    "content": "str"  # Optional. Optional content.
+                }
+        """
+
+    @overload
+    def verify_without_code(
+        self, body: IO[bytes], *, apc_gateway_id: str, content_type: str = "application/json", **kwargs: Any
+    ) -> _models.EmptyResponse:
+        """Verifies the phone number (MSISDN) associated with a device. As part of the frontend
+        authorization flow, the device is redirected to the operator network to authenticate directly.
+
+        :param body: Required.
+        :type body: IO[bytes]
+        :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
+         request. Required.
+        :paramtype apc_gateway_id: str
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: EmptyResponse. The EmptyResponse is compatible with MutableMapping
+        :rtype: ~azure.programmableconnectivity.models.EmptyResponse
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 302
+                response == {
+                    "content": "str"  # Optional. Optional content.
+                }
+        """
+
+    @distributed_trace
+    def verify_without_code(
+        self,
+        body: Union[_models.NumberVerificationWithoutCodeContent, JSON, IO[bytes]],
+        *,
+        apc_gateway_id: str,
+        **kwargs: Any
+    ) -> _models.EmptyResponse:
+        # pylint: disable=line-too-long
+        """Verifies the phone number (MSISDN) associated with a device. As part of the frontend
+        authorization flow, the device is redirected to the operator network to authenticate directly.
+
+        :param body: Is one of the following types: NumberVerificationWithoutCodeContent, JSON,
+         IO[bytes] Required.
+        :type body: ~azure.programmableconnectivity.models.NumberVerificationWithoutCodeContent or JSON
+         or IO[bytes]
+        :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
+         request. Required.
+        :paramtype apc_gateway_id: str
+        :return: EmptyResponse. The EmptyResponse is compatible with MutableMapping
+        :rtype: ~azure.programmableconnectivity.models.EmptyResponse
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # JSON input template you can fill out and use as your body input.
+                body = {
+                    "networkIdentifier": {
+                        "identifier": "str",  # The network identifier in a format matching
+                          the type above:   * IPv4 of a device in dotted-quad form 1.2.3.4. * IPv6 of a
+                          device in IETF 5952 format. * NetworkCode matching our documentation or an
+                          output from /Network:retrieve.". Required.
+                        "identifierType": "str"  # The type of identifier for the network.
+                          one of: 'IPv4', 'IPv6', 'NetworkCode'. Required.
+                    },
+                    "hashedPhoneNumber": "str",  # Optional. Hashed phone number. SHA-256 (in
+                      hexadecimal representation) of the mobile phone number in **E.164 format
+                      (starting with country code)**. Optionally prefixed with '+'.
+                    "phoneNumber": "str"  # Optional. Phone number in E.164 format (starting with
+                      country code), and optionally prefixed with '+'.
+                }
+
+                # response body for status code(s): 302
+                response == {
+                    "content": "str"  # Optional. Optional content.
+                }
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = kwargs.pop("params", {}) or {}
+
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.EmptyResponse] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _content = None
+        if isinstance(body, (IOBase, bytes)):
+            _content = body
+        else:
+            _content = json.dumps(body, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
+
+        _request = build_number_verification_verify_without_code_request(
+            apc_gateway_id=apc_gateway_id,
+            content_type=content_type,
+            api_version=self._config.api_version,
+            content=_content,
+            headers=_headers,
+            params=_params,
+        )
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
+        }
+        _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+        _stream = kwargs.pop("stream", False)
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [302]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response)
+
+        response_headers = {}
+        response_headers["location"] = self._deserialize("str", response.headers.get("location"))
+        response_headers["x-ms-request-id"] = self._deserialize("str", response.headers.get("x-ms-request-id"))
+        response_headers["x-ms-client-request-id"] = self._deserialize(
+            "str", response.headers.get("x-ms-client-request-id")
+        )
+
+        if _stream:
+            deserialized = response.iter_bytes()
+        else:
+            deserialized = _deserialize(_models.EmptyResponse, response.json())
+
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @overload
+    def verify_with_code(
+        self,
+        body: _models.NumberVerificationWithCodeContent,
+        *,
+        apc_gateway_id: str,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.NumberVerificationResult:
+        # pylint: disable=line-too-long
+        """Verifies the phone number (MSISDN) associated with a device.
+
+        :param body: Required.
+        :type body: ~azure.programmableconnectivity.models.NumberVerificationWithCodeContent
+        :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
+         request. Required.
+        :paramtype apc_gateway_id: str
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: NumberVerificationResult. The NumberVerificationResult is compatible with
+         MutableMapping
+        :rtype: ~azure.programmableconnectivity.models.NumberVerificationResult
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # JSON input template you can fill out and use as your body input.
+                body = {
+                    "apcCode": "str",  # The code provided by APC in exchange for the operator
+                      code. Required.
+                    "networkIdentifier": {
+                        "identifier": "str",  # The network identifier in a format matching
+                          the type above:   * IPv4 of a device in dotted-quad form 1.2.3.4. * IPv6 of a
+                          device in IETF 5952 format. * NetworkCode matching our documentation or an
+                          output from /Network:retrieve.". Required.
+                        "identifierType": "str"  # The type of identifier for the network.
+                          one of: 'IPv4', 'IPv6', 'NetworkCode'. Required.
+                    },
+                    "hashedPhoneNumber": "str",  # Optional. Hashed phone number. SHA-256 (in
+                      hexadecimal representation) of the mobile phone number in **E.164 format
+                      (starting with country code)**. Optionally prefixed with '+'.
+                    "phoneNumber": "str"  # Optional. Phone number in E.164 format (starting with
+                      country code), and optionally prefixed with '+'.
+                }
+
+                # response body for status code(s): 200
+                response == {
+                    "verificationResult": bool  # True if number if the phone number matches the
+                      device, False otherwise. Required.
+                }
+        """
+
+    @overload
+    def verify_with_code(
+        self, body: JSON, *, apc_gateway_id: str, content_type: str = "application/json", **kwargs: Any
+    ) -> _models.NumberVerificationResult:
+        """Verifies the phone number (MSISDN) associated with a device.
+
+        :param body: Required.
+        :type body: JSON
+        :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
+         request. Required.
+        :paramtype apc_gateway_id: str
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: NumberVerificationResult. The NumberVerificationResult is compatible with
+         MutableMapping
+        :rtype: ~azure.programmableconnectivity.models.NumberVerificationResult
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "verificationResult": bool  # True if number if the phone number matches the
+                      device, False otherwise. Required.
+                }
+        """
+
+    @overload
+    def verify_with_code(
+        self, body: IO[bytes], *, apc_gateway_id: str, content_type: str = "application/json", **kwargs: Any
+    ) -> _models.NumberVerificationResult:
+        """Verifies the phone number (MSISDN) associated with a device.
+
+        :param body: Required.
+        :type body: IO[bytes]
+        :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
+         request. Required.
+        :paramtype apc_gateway_id: str
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: NumberVerificationResult. The NumberVerificationResult is compatible with
+         MutableMapping
+        :rtype: ~azure.programmableconnectivity.models.NumberVerificationResult
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # response body for status code(s): 200
+                response == {
+                    "verificationResult": bool  # True if number if the phone number matches the
+                      device, False otherwise. Required.
+                }
+        """
+
+    @distributed_trace
+    def verify_with_code(
+        self,
+        body: Union[_models.NumberVerificationWithCodeContent, JSON, IO[bytes]],
+        *,
+        apc_gateway_id: str,
+        **kwargs: Any
+    ) -> _models.NumberVerificationResult:
+        # pylint: disable=line-too-long
+        """Verifies the phone number (MSISDN) associated with a device.
+
+        :param body: Is one of the following types: NumberVerificationWithCodeContent, JSON, IO[bytes]
+         Required.
+        :type body: ~azure.programmableconnectivity.models.NumberVerificationWithCodeContent or JSON or
+         IO[bytes]
+        :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
+         request. Required.
+        :paramtype apc_gateway_id: str
+        :return: NumberVerificationResult. The NumberVerificationResult is compatible with
+         MutableMapping
+        :rtype: ~azure.programmableconnectivity.models.NumberVerificationResult
+        :raises ~azure.core.exceptions.HttpResponseError:
+
+        Example:
+            .. code-block:: python
+
+                # JSON input template you can fill out and use as your body input.
+                body = {
+                    "apcCode": "str",  # The code provided by APC in exchange for the operator
+                      code. Required.
+                    "networkIdentifier": {
+                        "identifier": "str",  # The network identifier in a format matching
+                          the type above:   * IPv4 of a device in dotted-quad form 1.2.3.4. * IPv6 of a
+                          device in IETF 5952 format. * NetworkCode matching our documentation or an
+                          output from /Network:retrieve.". Required.
+                        "identifierType": "str"  # The type of identifier for the network.
+                          one of: 'IPv4', 'IPv6', 'NetworkCode'. Required.
+                    },
+                    "hashedPhoneNumber": "str",  # Optional. Hashed phone number. SHA-256 (in
+                      hexadecimal representation) of the mobile phone number in **E.164 format
+                      (starting with country code)**. Optionally prefixed with '+'.
+                    "phoneNumber": "str"  # Optional. Phone number in E.164 format (starting with
+                      country code), and optionally prefixed with '+'.
+                }
+
+                # response body for status code(s): 200
+                response == {
+                    "verificationResult": bool  # True if number if the phone number matches the
+                      device, False otherwise. Required.
+                }
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = kwargs.pop("params", {}) or {}
+
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.NumberVerificationResult] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _content = None
+        if isinstance(body, (IOBase, bytes)):
+            _content = body
+        else:
+            _content = json.dumps(body, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
+
+        _request = build_number_verification_verify_with_code_request(
+            apc_gateway_id=apc_gateway_id,
+            content_type=content_type,
+            api_version=self._config.api_version,
+            content=_content,
+            headers=_headers,
+            params=_params,
+        )
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.endpoint", self._config.endpoint, "str", skip_quote=True),
+        }
+        _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+        _stream = kwargs.pop("stream", False)
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                response.read()  # Load the body in memory and close the socket
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response)
+
+        response_headers = {}
+        response_headers["x-ms-client-request-id"] = self._deserialize(
+            "str", response.headers.get("x-ms-client-request-id")
+        )
+        response_headers["x-ms-request-id"] = self._deserialize("str", response.headers.get("x-ms-request-id"))
+
+        if _stream:
+            deserialized = response.iter_bytes()
+        else:
+            deserialized = _deserialize(_models.NumberVerificationResult, response.json())
+
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+
+        return deserialized  # type: ignore
+
+
+class SimSwapOperations:
+    """
+    .. warning::
+        **DO NOT** instantiate this class directly.
+
+        Instead, you should access the following operations through
+        :class:`~azure.programmableconnectivity.ProgrammableConnectivityClient`'s
+        :attr:`sim_swap` attribute.
     """
 
     def __init__(self, *args, **kwargs):
@@ -1318,30 +1181,25 @@ class SimSwapInterfaceOperations:
     @overload
     def retrieve(
         self,
-        sim_swap: Union[str, _models.SimSwapEnum],
-        body: _models.SimSwapRetrieveRequest,
+        body: _models.SimSwapRetrievalContent,
         *,
         apc_gateway_id: str,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.SimSwapRetrieveResponse:
+    ) -> _models.SimSwapRetrievalResult:
         # pylint: disable=line-too-long
         """Provides timestamp of latest SIM swap.
 
-        :param sim_swap: Static endpoint. "SimSwap" Required.
-        :type sim_swap: str or ~azure.programmableconnectivity.models.SimSwapEnum
         :param body: Required.
-        :type body: ~azure.programmableconnectivity.models.SimSwapRetrieveRequest
+        :type body: ~azure.programmableconnectivity.models.SimSwapRetrievalContent
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
          request. Required.
         :paramtype apc_gateway_id: str
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
-        :keyword bool stream: Whether to stream the response of this operation. Defaults to False. You
-         will have to context manage the returned stream.
-        :return: SimSwapRetrieveResponse. The SimSwapRetrieveResponse is compatible with MutableMapping
-        :rtype: ~azure.programmableconnectivity.models.SimSwapRetrieveResponse
+        :return: SimSwapRetrievalResult. The SimSwapRetrievalResult is compatible with MutableMapping
+        :rtype: ~azure.programmableconnectivity.models.SimSwapRetrievalResult
         :raises ~azure.core.exceptions.HttpResponseError:
 
         Example:
@@ -1370,18 +1228,10 @@ class SimSwapInterfaceOperations:
 
     @overload
     def retrieve(
-        self,
-        sim_swap: Union[str, _models.SimSwapEnum],
-        body: JSON,
-        *,
-        apc_gateway_id: str,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.SimSwapRetrieveResponse:
+        self, body: JSON, *, apc_gateway_id: str, content_type: str = "application/json", **kwargs: Any
+    ) -> _models.SimSwapRetrievalResult:
         """Provides timestamp of latest SIM swap.
 
-        :param sim_swap: Static endpoint. "SimSwap" Required.
-        :type sim_swap: str or ~azure.programmableconnectivity.models.SimSwapEnum
         :param body: Required.
         :type body: JSON
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -1390,10 +1240,8 @@ class SimSwapInterfaceOperations:
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
-        :keyword bool stream: Whether to stream the response of this operation. Defaults to False. You
-         will have to context manage the returned stream.
-        :return: SimSwapRetrieveResponse. The SimSwapRetrieveResponse is compatible with MutableMapping
-        :rtype: ~azure.programmableconnectivity.models.SimSwapRetrieveResponse
+        :return: SimSwapRetrievalResult. The SimSwapRetrievalResult is compatible with MutableMapping
+        :rtype: ~azure.programmableconnectivity.models.SimSwapRetrievalResult
         :raises ~azure.core.exceptions.HttpResponseError:
 
         Example:
@@ -1408,18 +1256,10 @@ class SimSwapInterfaceOperations:
 
     @overload
     def retrieve(
-        self,
-        sim_swap: Union[str, _models.SimSwapEnum],
-        body: IO[bytes],
-        *,
-        apc_gateway_id: str,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.SimSwapRetrieveResponse:
+        self, body: IO[bytes], *, apc_gateway_id: str, content_type: str = "application/json", **kwargs: Any
+    ) -> _models.SimSwapRetrievalResult:
         """Provides timestamp of latest SIM swap.
 
-        :param sim_swap: Static endpoint. "SimSwap" Required.
-        :type sim_swap: str or ~azure.programmableconnectivity.models.SimSwapEnum
         :param body: Required.
         :type body: IO[bytes]
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -1428,10 +1268,8 @@ class SimSwapInterfaceOperations:
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
-        :keyword bool stream: Whether to stream the response of this operation. Defaults to False. You
-         will have to context manage the returned stream.
-        :return: SimSwapRetrieveResponse. The SimSwapRetrieveResponse is compatible with MutableMapping
-        :rtype: ~azure.programmableconnectivity.models.SimSwapRetrieveResponse
+        :return: SimSwapRetrievalResult. The SimSwapRetrievalResult is compatible with MutableMapping
+        :rtype: ~azure.programmableconnectivity.models.SimSwapRetrievalResult
         :raises ~azure.core.exceptions.HttpResponseError:
 
         Example:
@@ -1446,30 +1284,18 @@ class SimSwapInterfaceOperations:
 
     @distributed_trace
     def retrieve(
-        self,
-        sim_swap: Union[str, _models.SimSwapEnum],
-        body: Union[_models.SimSwapRetrieveRequest, JSON, IO[bytes]],
-        *,
-        apc_gateway_id: str,
-        **kwargs: Any
-    ) -> _models.SimSwapRetrieveResponse:
+        self, body: Union[_models.SimSwapRetrievalContent, JSON, IO[bytes]], *, apc_gateway_id: str, **kwargs: Any
+    ) -> _models.SimSwapRetrievalResult:
         # pylint: disable=line-too-long
         """Provides timestamp of latest SIM swap.
 
-        :param sim_swap: Static endpoint. "SimSwap" Required.
-        :type sim_swap: str or ~azure.programmableconnectivity.models.SimSwapEnum
-        :param body: Is one of the following types: SimSwapRetrieveRequest, JSON, IO[bytes] Required.
-        :type body: ~azure.programmableconnectivity.models.SimSwapRetrieveRequest or JSON or IO[bytes]
+        :param body: Is one of the following types: SimSwapRetrievalContent, JSON, IO[bytes] Required.
+        :type body: ~azure.programmableconnectivity.models.SimSwapRetrievalContent or JSON or IO[bytes]
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
          request. Required.
         :paramtype apc_gateway_id: str
-        :keyword content_type: Body parameter Content-Type. Known values are: application/json. Default
-         value is None.
-        :paramtype content_type: str
-        :keyword bool stream: Whether to stream the response of this operation. Defaults to False. You
-         will have to context manage the returned stream.
-        :return: SimSwapRetrieveResponse. The SimSwapRetrieveResponse is compatible with MutableMapping
-        :rtype: ~azure.programmableconnectivity.models.SimSwapRetrieveResponse
+        :return: SimSwapRetrievalResult. The SimSwapRetrievalResult is compatible with MutableMapping
+        :rtype: ~azure.programmableconnectivity.models.SimSwapRetrievalResult
         :raises ~azure.core.exceptions.HttpResponseError:
 
         Example:
@@ -1507,7 +1333,7 @@ class SimSwapInterfaceOperations:
         _params = kwargs.pop("params", {}) or {}
 
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.SimSwapRetrieveResponse] = kwargs.pop("cls", None)
+        cls: ClsType[_models.SimSwapRetrievalResult] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _content = None
@@ -1516,11 +1342,10 @@ class SimSwapInterfaceOperations:
         else:
             _content = json.dumps(body, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
 
-        _request = build_sim_swap_interface_retrieve_request(
-            sim_swap=sim_swap,
+        _request = build_sim_swap_retrieve_request(
             apc_gateway_id=apc_gateway_id,
-            api_version=self._config.api_version,
             content_type=content_type,
+            api_version=self._config.api_version,
             content=_content,
             headers=_headers,
             params=_params,
@@ -1541,18 +1366,18 @@ class SimSwapInterfaceOperations:
             if _stream:
                 response.read()  # Load the body in memory and close the socket
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _deserialize(_models.ApcErrorResponse, response.json())
-            raise HttpResponseError(response=response, model=error)
+            raise HttpResponseError(response=response)
 
         response_headers = {}
         response_headers["x-ms-client-request-id"] = self._deserialize(
             "str", response.headers.get("x-ms-client-request-id")
         )
+        response_headers["x-ms-request-id"] = self._deserialize("str", response.headers.get("x-ms-request-id"))
 
         if _stream:
             deserialized = response.iter_bytes()
         else:
-            deserialized = _deserialize(_models.SimSwapRetrieveResponse, response.json())
+            deserialized = _deserialize(_models.SimSwapRetrievalResult, response.json())
 
         if cls:
             return cls(pipeline_response, deserialized, response_headers)  # type: ignore
@@ -1562,31 +1387,27 @@ class SimSwapInterfaceOperations:
     @overload
     def verify(
         self,
-        sim_swap: Union[str, _models.SimSwapEnum],
-        body: _models.SimSwapVerifyRequest,
+        body: _models.SimSwapVerificationContent,
         *,
         apc_gateway_id: str,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.SimSwapVerifyResponse:
+    ) -> _models.SimSwapVerificationResult:
         # pylint: disable=line-too-long
         """Verifies if a SIM swap has been performed during a past period (defined in the request with
         'maxAgeHours' attribute). Returns 'True' if a SIM swap has occured.
 
-        :param sim_swap: Static endpoint. "SimSwap" Required.
-        :type sim_swap: str or ~azure.programmableconnectivity.models.SimSwapEnum
         :param body: Required.
-        :type body: ~azure.programmableconnectivity.models.SimSwapVerifyRequest
+        :type body: ~azure.programmableconnectivity.models.SimSwapVerificationContent
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
          request. Required.
         :paramtype apc_gateway_id: str
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
-        :keyword bool stream: Whether to stream the response of this operation. Defaults to False. You
-         will have to context manage the returned stream.
-        :return: SimSwapVerifyResponse. The SimSwapVerifyResponse is compatible with MutableMapping
-        :rtype: ~azure.programmableconnectivity.models.SimSwapVerifyResponse
+        :return: SimSwapVerificationResult. The SimSwapVerificationResult is compatible with
+         MutableMapping
+        :rtype: ~azure.programmableconnectivity.models.SimSwapVerificationResult
         :raises ~azure.core.exceptions.HttpResponseError:
 
         Example:
@@ -1616,19 +1437,11 @@ class SimSwapInterfaceOperations:
 
     @overload
     def verify(
-        self,
-        sim_swap: Union[str, _models.SimSwapEnum],
-        body: JSON,
-        *,
-        apc_gateway_id: str,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.SimSwapVerifyResponse:
+        self, body: JSON, *, apc_gateway_id: str, content_type: str = "application/json", **kwargs: Any
+    ) -> _models.SimSwapVerificationResult:
         """Verifies if a SIM swap has been performed during a past period (defined in the request with
         'maxAgeHours' attribute). Returns 'True' if a SIM swap has occured.
 
-        :param sim_swap: Static endpoint. "SimSwap" Required.
-        :type sim_swap: str or ~azure.programmableconnectivity.models.SimSwapEnum
         :param body: Required.
         :type body: JSON
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -1637,10 +1450,9 @@ class SimSwapInterfaceOperations:
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
-        :keyword bool stream: Whether to stream the response of this operation. Defaults to False. You
-         will have to context manage the returned stream.
-        :return: SimSwapVerifyResponse. The SimSwapVerifyResponse is compatible with MutableMapping
-        :rtype: ~azure.programmableconnectivity.models.SimSwapVerifyResponse
+        :return: SimSwapVerificationResult. The SimSwapVerificationResult is compatible with
+         MutableMapping
+        :rtype: ~azure.programmableconnectivity.models.SimSwapVerificationResult
         :raises ~azure.core.exceptions.HttpResponseError:
 
         Example:
@@ -1655,19 +1467,11 @@ class SimSwapInterfaceOperations:
 
     @overload
     def verify(
-        self,
-        sim_swap: Union[str, _models.SimSwapEnum],
-        body: IO[bytes],
-        *,
-        apc_gateway_id: str,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.SimSwapVerifyResponse:
+        self, body: IO[bytes], *, apc_gateway_id: str, content_type: str = "application/json", **kwargs: Any
+    ) -> _models.SimSwapVerificationResult:
         """Verifies if a SIM swap has been performed during a past period (defined in the request with
         'maxAgeHours' attribute). Returns 'True' if a SIM swap has occured.
 
-        :param sim_swap: Static endpoint. "SimSwap" Required.
-        :type sim_swap: str or ~azure.programmableconnectivity.models.SimSwapEnum
         :param body: Required.
         :type body: IO[bytes]
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
@@ -1676,10 +1480,9 @@ class SimSwapInterfaceOperations:
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
-        :keyword bool stream: Whether to stream the response of this operation. Defaults to False. You
-         will have to context manage the returned stream.
-        :return: SimSwapVerifyResponse. The SimSwapVerifyResponse is compatible with MutableMapping
-        :rtype: ~azure.programmableconnectivity.models.SimSwapVerifyResponse
+        :return: SimSwapVerificationResult. The SimSwapVerificationResult is compatible with
+         MutableMapping
+        :rtype: ~azure.programmableconnectivity.models.SimSwapVerificationResult
         :raises ~azure.core.exceptions.HttpResponseError:
 
         Example:
@@ -1694,31 +1497,22 @@ class SimSwapInterfaceOperations:
 
     @distributed_trace
     def verify(
-        self,
-        sim_swap: Union[str, _models.SimSwapEnum],
-        body: Union[_models.SimSwapVerifyRequest, JSON, IO[bytes]],
-        *,
-        apc_gateway_id: str,
-        **kwargs: Any
-    ) -> _models.SimSwapVerifyResponse:
+        self, body: Union[_models.SimSwapVerificationContent, JSON, IO[bytes]], *, apc_gateway_id: str, **kwargs: Any
+    ) -> _models.SimSwapVerificationResult:
         # pylint: disable=line-too-long
         """Verifies if a SIM swap has been performed during a past period (defined in the request with
         'maxAgeHours' attribute). Returns 'True' if a SIM swap has occured.
 
-        :param sim_swap: Static endpoint. "SimSwap" Required.
-        :type sim_swap: str or ~azure.programmableconnectivity.models.SimSwapEnum
-        :param body: Is one of the following types: SimSwapVerifyRequest, JSON, IO[bytes] Required.
-        :type body: ~azure.programmableconnectivity.models.SimSwapVerifyRequest or JSON or IO[bytes]
+        :param body: Is one of the following types: SimSwapVerificationContent, JSON, IO[bytes]
+         Required.
+        :type body: ~azure.programmableconnectivity.models.SimSwapVerificationContent or JSON or
+         IO[bytes]
         :keyword apc_gateway_id: The identifier of the APC Gateway resource which should handle this
          request. Required.
         :paramtype apc_gateway_id: str
-        :keyword content_type: Body parameter Content-Type. Known values are: application/json. Default
-         value is None.
-        :paramtype content_type: str
-        :keyword bool stream: Whether to stream the response of this operation. Defaults to False. You
-         will have to context manage the returned stream.
-        :return: SimSwapVerifyResponse. The SimSwapVerifyResponse is compatible with MutableMapping
-        :rtype: ~azure.programmableconnectivity.models.SimSwapVerifyResponse
+        :return: SimSwapVerificationResult. The SimSwapVerificationResult is compatible with
+         MutableMapping
+        :rtype: ~azure.programmableconnectivity.models.SimSwapVerificationResult
         :raises ~azure.core.exceptions.HttpResponseError:
 
         Example:
@@ -1757,7 +1551,7 @@ class SimSwapInterfaceOperations:
         _params = kwargs.pop("params", {}) or {}
 
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.SimSwapVerifyResponse] = kwargs.pop("cls", None)
+        cls: ClsType[_models.SimSwapVerificationResult] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _content = None
@@ -1766,11 +1560,10 @@ class SimSwapInterfaceOperations:
         else:
             _content = json.dumps(body, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
 
-        _request = build_sim_swap_interface_verify_request(
-            sim_swap=sim_swap,
+        _request = build_sim_swap_verify_request(
             apc_gateway_id=apc_gateway_id,
-            api_version=self._config.api_version,
             content_type=content_type,
+            api_version=self._config.api_version,
             content=_content,
             headers=_headers,
             params=_params,
@@ -1791,18 +1584,18 @@ class SimSwapInterfaceOperations:
             if _stream:
                 response.read()  # Load the body in memory and close the socket
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _deserialize(_models.ApcErrorResponse, response.json())
-            raise HttpResponseError(response=response, model=error)
+            raise HttpResponseError(response=response)
 
         response_headers = {}
         response_headers["x-ms-client-request-id"] = self._deserialize(
             "str", response.headers.get("x-ms-client-request-id")
         )
+        response_headers["x-ms-request-id"] = self._deserialize("str", response.headers.get("x-ms-request-id"))
 
         if _stream:
             deserialized = response.iter_bytes()
         else:
-            deserialized = _deserialize(_models.SimSwapVerifyResponse, response.json())
+            deserialized = _deserialize(_models.SimSwapVerificationResult, response.json())
 
         if cls:
             return cls(pipeline_response, deserialized, response_headers)  # type: ignore
